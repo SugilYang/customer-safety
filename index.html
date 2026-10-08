@@ -16,14 +16,15 @@ input,select{font:inherit}
 a{color:var(--g)}
 .app{max-width:560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
 /* header */
-.top{position:sticky;top:0;z-index:10;background:var(--g);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.top{position:sticky;top:0;z-index:10;background:var(--g);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .logo{display:flex;align-items:center;gap:8px}
-.logo img{height:26px;display:block}
+.logo img{height:28px;display:block}
 .lg{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:5px 9px;height:34px}
 .lg img{height:22px;display:block}
 .wm{font-weight:900;letter-spacing:.5px;font-size:20px;background:#fff;color:var(--g);padding:0 8px;border-radius:6px;line-height:26px}
-.top .t{font-weight:700;font-size:15px;line-height:1.2}
-.top .t small{display:block;font-weight:400;font-size:11px;opacity:.85}
+.top .t{font-weight:700;font-size:17px;line-height:1.25;white-space:nowrap;min-width:0;letter-spacing:-.2px}
+@media(max-width:360px){.top{gap:12px}.top .t{font-size:15px}.top .t small{font-size:11px}}
+.top .t small{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:2px}
 .top .back{margin-left:auto;background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px}
 main{flex:1;padding:16px 16px 90px}
 /* tabs */
@@ -54,7 +55,7 @@ ol.list li,ul.list li{margin:5px 0}
 .src{font-size:11.5px;color:var(--mute);margin-top:8px;display:flex;align-items:flex-start;gap:5px}
 .src:before{content:"출처";flex:none;font-weight:700;color:var(--g);background:var(--g3);padding:0 6px;border-radius:4px;font-size:10.5px;line-height:18px}
 .kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
-.kv b{color:var(--mute);font-weight:500}
+.kv b{color:var(--mute);font-weight:500;white-space:nowrap}.kv span{line-height:1.45}.kv span small{font-size:12.5px;color:var(--mute)}
 .alert{background:var(--red-bg);border-left:4px solid var(--red);padding:10px 12px;border-radius:8px;font-size:13.5px;margin-bottom:12px}
 /* quick grid */
 .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
@@ -83,7 +84,8 @@ ol.list li,ul.list li{margin:5px 0}
 table{width:100%;border-collapse:collapse;font-size:13px}
 th,td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 th{color:var(--mute);font-weight:500;font-size:12px}
-td.n{text-align:right;white-space:nowrap;font-weight:700}
+td.n,th.n{text-align:right;white-space:nowrap;font-weight:700;width:1%}
+td.n.multi{white-space:normal;font-size:11.5px;line-height:1.3}
 /* training */
 .prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:0 0 12px}
 .prog i{display:block;height:100%;background:var(--g);transition:width .3s}
@@ -154,7 +156,10 @@ td.n{text-align:right;white-space:nowrap;font-weight:700}
 .done .ok{width:72px;height:72px;border-radius:50%;background:var(--g3);color:var(--g);display:inline-flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:10px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:10px;font-size:13.5px;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%;text-align:center}
 .toast.show{opacity:1}
-.foot{text-align:center;font-size:11px;color:var(--mute);padding:14px 0 0}
+.foot{text-align:center;font-size:11px;color:var(--mute);padding:14px 0 0;line-height:1.7}.foot .dev{display:inline-block;margin-top:4px;font-size:10.5px;opacity:.8}
+.prer{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin:0 0 12px}.prer.sm{margin:0 0 12px;background:var(--g3);box-shadow:none}
+.prer .ph{font-weight:700;font-size:14px}.prer .ph small{display:block;font-weight:400;font-size:12px;color:var(--mute);margin-top:2px}.prer .ph small b{color:var(--g)}
+.prer .pb{display:flex;gap:8px;margin-top:10px}.prer .pb a{flex:1;text-align:center;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 6px;border-radius:10px;white-space:nowrap}
 .hid{display:none!important}
 @media (min-width:600px){main{padding:20px 20px 100px}}
 
@@ -206,7 +211,11 @@ ul.sub li:before{content:none}
 .acc.open .bd{display:block}
 .emg{display:flex;gap:8px;margin-bottom:12px}
 .emg a{flex:1;background:#fff;border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:center;gap:8px;font-size:13px}
-.emg a b{display:block;font-size:14px;color:var(--red)}
+.emg a b{display:block;font-size:14px;color:var(--red);white-space:nowrap}
+.emg a span{min-width:0}
+.ctr{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px}
+.ctr span{min-width:0;line-height:1.35}.ctr span small{display:block;font-size:12.5px;color:var(--mute)}
+.ctr b{color:var(--g);white-space:nowrap;flex-shrink:0}
 .emg.sp a b{color:var(--g)}
 /* 답변 카드 */
 .gcard{background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:12px;overflow:hidden}
@@ -254,7 +263,7 @@ ul.sub li:before{content:none}
 <div class="app">
   <header class="top">
     <div class="logo"><img src="img/ets_logo_white.png" alt="ETS" onerror="this.outerHTML='<span class=wm>ETS</span>'"></div>
-    <div class="t">고객사 현장 안전 길잡이<small>투입 전 교육 · 작업수칙 검색</small></div>
+    <div class="t">고객사 현장 안전 길잡이<small>출입 전 교육 · 작업수칙 검색</small></div>
     <button class="back hid" id="backBtn" onclick="goBack()">‹ 뒤로</button>
   </header>
   <main id="main"></main>
@@ -275,6 +284,9 @@ const IMG = 'img/';
 let D = null, view = 'home', T = {}, HIST = [];
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function verLine(dev){ const v=D.version||{}; return `주식회사 이티에스 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}${dev?`<br><span class="dev">개발 · ${esc(v['개발']||'')}</span>`:''}`; }
+function prereport(small){ const r=(D.version||{}).prereport||{}; if(!r.EP1) return ''; return `<div class="prer${small?' sm':''}"><div class="ph">📲 7대 고위험 사전신고방 <small>공사 전일 14~15시 · 참여코드 <b>${esc(r.code)}</b></small></div><div class="pb"><a href="${r.EP1}" target="_blank" rel="noopener">EP1 신고방 열기</a><a href="${r.EP2}" target="_blank" rel="noopener">EP2 신고방 열기</a></div></div>`; }
+function dash(t){ const a=esc(t).split(' — '); return a.length>1 ? a.map(x=>`<span style="white-space:nowrap">${x}</span>`).join(' — ') : esc(t); }
 // **굵게** 와 |칩| 표기 → HTML
 const rich = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\|([^|]+?)\|/g,(m,t)=>`<span class="chip ${/점$/.test(t)?'pt':(/퇴출|거래제한/.test(t)?'red':'')}">${t}</span>`);
 // "머리말 1) … 2) … ① … ②" 처럼 한 줄에 이어진 번호 항목을 줄 단위로 분리
@@ -327,7 +339,7 @@ const TOPICS = () => (D.guides||[]).slice(0,12);
 function showSplash(){
   const el=$('#splash'); if(!el) return;
   if(/[?&]nosplash/.test(location.search)) return; // 시연·점검용으로 끌 때만
-  const v=(window.FALLBACK_DATA&&window.FALLBACK_DATA.version)||{}; const ve=$('#spVer'); if(ve) ve.innerHTML=`${esc(v['버전']||'')} · 배포 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')} · 최근 반영 ${esc(v['최근반영']||'')}`;
+  const v=(window.FALLBACK_DATA&&window.FALLBACK_DATA.version)||{}; const ve=$('#spVer'); if(ve) ve.innerHTML=`${esc(v['버전']||'')} · 최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')} · 최근 반영 ${esc(v['최근반영']||'')}`;
   el.classList.remove('hid'); document.body.style.overflow='hidden';
   T.splashTimer=setTimeout(()=>endSplash(false), 3400);
 }
@@ -346,16 +358,16 @@ function homeView(){
     <div class="sbox"><input id="hq" placeholder="예: 사다리, 그라인더, 지게차, LOTO" onfocus="T.focus=true;go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
     <div class="topics">${TOPICS().map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['짧은이름']||g['제목'])}</button>`).join('')}</div>
   </div>
-  <button class="hero2" onclick="go('train')"><span class="i">▶</span><span><b>처음 투입이면 교육부터</b><small>${D.slides.length}장 · 약 ${Math.ceil(D.slides.length*Number(setting('장당_초',30))/60)}분 · 이수 후 ${esc(setting('유효기간_개월',6))}개월 유효</small></span><span class="go">시작</span></button>
-  <div class="acc" id="accOS"><button onclick="this.parentNode.classList.toggle('open')">⛔ 이것만은 절대 — 1회 적발 시 퇴출 7가지<span class="ar">›</span></button>
+  <button class="hero2" onclick="go('train')"><span class="i">▶</span><span><b>처음 출입이면 교육부터</b><small>${D.slides.length}장 · 약 ${Math.ceil(D.slides.length*Number(setting('장당_초',30))/60)}분 · 이수 후 ${esc(setting('유효기간_개월',6))}개월 유효</small></span><span class="go">시작</span></button>
+  <div class="acc" id="accOS"><button onclick="this.parentNode.classList.toggle('open')"><span><span style="white-space:nowrap">⛔ 1회 적발 시 바로 퇴출</span> — <span style="white-space:nowrap">7가지</span></span><span class="ar">›</span></button>
     <div class="bd"><ol class="list" style="font-size:14px">${os.map(r=>`<li>${esc(r['위반내역'])}</li>`).join('')}</ol>
     <p style="margin:8px 0 0;font-size:13px;color:var(--mute)">근로자 영구 퇴출 · 회사 거래제한 (26.10.1 시행, LG에너지솔루션 One Strike Out)</p></div></div>
-  <div class="sec" style="margin-top:4px">🚨 비상신고 — 화재·사고·누출 발생 시 즉시 (누르면 전화)</div>
-  <div class="emg"><a href="tel:0432197119">☎<span>방재센터 EP1<b>043-219-7119</b></span></a><a href="tel:0437180119">☎<span>방재센터 EP2<b>043-718-0119</b></span></a></div>
-  <div class="sec">📞 작업·허가서·안전 문의 — Safety Police (누르면 전화)</div>
+  <div class="sec" style="margin-top:4px">🚨 비상신고 — 화재·사고·누출 시 즉시</div>
+  <div class="emg" title="누르면 전화"><a href="tel:0432197119">☎<span>방재센터 EP1<b>043-219-7119</b></span></a><a href="tel:0437180119">☎<span>방재센터 EP2<b>043-718-0119</b></span></a></div>
+  <div class="sec">📞 작업·허가서·안전 문의 — Safety Police</div>
   <div class="emg sp"><a href="tel:01054873122">☎<span>EP1 이상억 팀장<b>010-5487-3122</b></span></a><a href="tel:01098006229">☎<span>EP2 변귀림 팀장<b>010-9800-6229</b></span></a></div>
-  <p style="font-size:12px;color:var(--mute);margin:-4px 2px 12px">비상 외 안전 문의는 환경안전팀이 아닌 Safety Police로 연락하세요. 총괄·주정차·페널티 문의는 더보기에 있습니다.</p>
-  <p class="foot">주식회사 이티에스 · ${esc((D.version||{})['버전']||'')} (${esc(((D.version||{})['배포일']||'').replace(/-/g,'.'))})<br>${esc((D.version||{})['자료기준']||'')} · 최근 반영 ${esc((D.version||{})['최근반영']||'')}</p>`;
+  <p style="font-size:12px;color:var(--mute);margin:-4px 2px 12px">비상 외 안전 문의는 환경안전팀이 아닌 Safety Police로 연락하세요. 총괄·주정차 문의는 더보기에 있습니다.</p>
+  <p class="foot">${verLine()}</p>`;
 }
 
 /* ===== 검색 ===== */
@@ -371,9 +383,9 @@ function renderResults(){
   const box=$('#res'), sg=$('#sugg'); if(!box) return; const q=(T.q||'').trim();
   if(!q){ sg.innerHTML=''; box.innerHTML=`<div class="sec">자주 찾는 작업</div><div class="card" style="padding:12px"><div class="topics" style="grid-template-columns:repeat(3,1fr)">${(D.guides||[]).map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['제목'])}</button>`).join('')}</div></div>`; return; }
   const G=(D.guides||[]).map(g=>[guideScore(g,q),g]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]);
-  sg.innerHTML = G.length>1 ? `<div class="sugg">${G.slice(0,5).map(g=>`<button onclick="go('guide','${g.id}')">${g['아이콘']} <b>${esc(g['제목'])}</b><small>${esc(g['한줄'])}</small></button>`).join('')}</div>` : '';
+  sg.innerHTML = G.length>1 ? `<div class="sugg">${G.slice(0,5).map(g=>`<button onclick="go('guide','${g.id}')">${g['아이콘']} <b>${esc(g['제목'])}</b><small>${dash(g['한줄'])}</small></button>`).join('')}</div>` : '';
   let html='';
-  if(G.length){ html+=guideCard(G[0], false); if(G.length>1) html+=`<div class="sec">관련 작업</div>`+G.slice(1,4).map(g=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${g.id}')"><b>${g['아이콘']} ${esc(g['제목'])}</b><div style="font-size:13px;color:var(--mute)">${esc(g['한줄'])}</div></div>`).join(''); }
+  if(G.length){ html+=guideCard(G[0], false); if(G.length>1) html+=`<div class="sec">관련 작업</div>`+G.slice(1,4).map(g=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${g.id}')"><b>${g['아이콘']} ${esc(g['제목'])}</b><div style="font-size:13px;color:var(--mute)">${dash(g['한줄'])}</div></div>`).join(''); }
   // 가이드가 없을 때만 규정·벌점 직접 검색
   if(!G.length){
     const O=(D.ops||[]).filter(o=>hit(q,o['코드'],o['제목'],o['분류'],o['연관검색어'],o['내용']));
@@ -391,10 +403,11 @@ function guideCard(g, full){
   const opsL=(g['근거OPS']||[]).map(c=>(D.ops||[]).find(o=>o['코드']===c)).filter(Boolean);
   const li=(arr,cls)=>`<ul>${arr.map(x=>liRich(x)).join('')}</ul>`;
   return `<div class="gcard">
-    <div class="gh"><span class="ic">${g['아이콘']}</span><div><h2>${esc(g['제목'])}</h2><p>${esc(g['한줄'])}</p></div></div>
+    <div class="gh"><span class="ic">${g['아이콘']}</span><div><h2>${esc(g['제목'])}</h2><p>${dash(g['한줄'])}</p></div></div>
     <div class="gsec do"><h5>✅ 이렇게 하세요</h5>${li(g['하세요'])}</div>
     <div class="gsec dont"><h5>⛔ 하면 안 됩니다</h5>${li(g['금지'])}</div>
     ${g['위반']&&g['위반'].length?`<div class="gsec viol"><h5>⚠️ 위반하면</h5>${li(g['위반'])}</div>`:''}
+    ${g['고위험']?prereport(true):''}
     ${g['이미지']?`<div class="gimg"><img src="${IMG}${esc(g['이미지'])}" alt="" loading="lazy"></div>`:''}
     <div class="gfoot">
       ${opsL.length||pens.length?`<div class="refs">근거 ${opsL.map(o=>`<span>${esc(o['코드'])} ${esc(o['제목'])}</span>`).join('')}${pens.map(p=>`<span>벌점표 ${esc(p['코드'])}</span>`).join('')}</div>`:''}
@@ -411,7 +424,7 @@ function guideView(){
   return guideCard(g,true)
    + (opsL.length?`<div class="acc" id="gops"><button onclick="this.parentNode.classList.toggle('open')">📄 LG 규정 원문 (${opsL.length}건)<span class="ar">›</span></button><div class="bd"><div class="ops" style="margin-top:6px">${opsL.map(o=>opsCard(o,true)).join('')}</div></div></div>`:'')
    + (pens.length?`<div class="acc"><button onclick="this.parentNode.classList.toggle('open')">⚠️ 관련 벌점 항목 (${pens.length})<span class="ar">›</span></button><div class="bd">${pens.map(p=>penaltyCard(p)).join('')}</div></div>`:'')
-   + (rel.length?`<div class="sec">함께 보면 좋은 작업</div>${rel.map(x=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${x.id}')"><b>${x['아이콘']} ${esc(x['제목'])}</b><div style="font-size:13px;color:var(--mute)">${esc(x['한줄'])}</div></div>`).join('')}`:'');
+   + (rel.length?`<div class="sec">함께 보면 좋은 작업</div>${rel.map(x=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${x.id}')"><b>${x['아이콘']} ${esc(x['제목'])}</b><div style="font-size:13px;color:var(--mute)">${dash(x['한줄'])}</div></div>`).join('')}`:'');
 }
 
 function penaltyCard(p){
@@ -428,19 +441,20 @@ function moreView(){
   return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}${adminBtn}</div>
   <div class="sec">연락처 (누르면 전화)</div>
   <div class="card" style="padding:6px 14px">
-    ${[['🚨 비상 — 화재·사고·누출 즉시 신고','방재센터 EP1','043-219-7119'],['','방재센터 EP2','043-718-0119'],['📞 작업·안전 문의, 교육 협의','Safety Police EP1 이상억 팀장','010-5487-3122'],['','Safety Police EP2 변귀림 팀장','010-9800-6229'],['안전 지도·법규·KOSHA 문의','Safety Police 총괄 곽충호 소장','010-3871-7939'],['주·정차 관련','LG 사무','043-718-0123'],['페널티 점수 문의','LG 사무','043-219-9711']].map(([h,n,t])=>`${h?`<div style="font-size:12px;color:var(--mute);margin:10px 0 2px;font-weight:700">${h}</div>`:''}<a href="tel:${t.replace(/-/g,'')}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px"><span>${n}</span><b style="color:var(--g)">☎ ${t}</b></a>`).join('')}
+    ${[['🚨 비상 — 화재·사고·누출 즉시 신고','방재센터 EP1','','043-219-7119'],['','방재센터 EP2','','043-718-0119'],['📞 작업·안전 문의, 교육 협의','Safety Police EP1','이상억 팀장','010-5487-3122'],['','Safety Police EP2','변귀림 팀장','010-9800-6229'],['안전 지도·법규·KOSHA 문의','Safety Police 총괄','곽충호 소장','010-3871-7939'],['주·정차 관련','LG 사무실','','043-718-0123']].map(([h,n,s,t])=>`${h?`<div style="font-size:12px;color:var(--mute);margin:10px 0 2px;font-weight:700">${h}</div>`:''}<a href="tel:${t.replace(/-/g,'')}" class="ctr"><span>${n}${s?`<small>${s}</small>`:''}</span><b>☎ ${t}</b></a>`).join('')}
     <div class="src">26년 5·7·8월 협의체 "공사 안전 관련 문의 사항 안내" · 이메일 ssmteam@lgensol.com / kch1004@lgensol.com</div>
   </div>
   <div class="sec">작업시간 · 사전신고</div>
   <div class="card"><div class="kv">
-    <b>작업 시작</b><span>09:00 (LG 담당자 협의 시 06:00~09:00)</span>
-    <b>연장 작업</b><span>17~22시 · 일반 당일 17시, 크레인 당일 13시까지 승인 · 고위험 불가</span>
-    <b>주말 허가서</b><span>08~09시 / 13~13:30 발급 · 작업 08시부터</span>
-    <b>7대 고위험</b><span>전일 14~15시 사전신고방 (코드 2119) — 3m↑고소·화기·활성화·전기실·밀폐·고중량</span>
+    <b>작업 시작</b><span>09:00<br><small>LG 담당자 협의 시 06:00~09:00</small></span>
+    <b>연장 작업</b><span>17~22시<br><small>일반은 당일 17시, 크레인은 당일 13시까지 승인 · 고위험 불가</small></span>
+    <b>주말 허가서</b><span>08~09시 / 13~13:30 발급<br><small>작업은 08시부터</small></span>
+    <b>7대 고위험</b><span>전일 14~15시 사전신고방 <span style="white-space:nowrap">(코드 2119)</span><br><small>3m↑고소 · 화기 · 활성화 · 전기실 · 밀폐 · 고중량</small></span>
+  </div>${prereport(false)}<div class="kv" style="display:none">
   </div></div>
   <div class="sec">최근 규정 변경</div>
   ${changes.map(c=>`<div class="card" style="padding:12px 14px"><span style="font-size:12px;color:var(--mute)">${esc(c['시행일'])}</span> ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:14px;margin-top:2px">${esc(c['내용'])}</div></div>`).join('')}
-  <p class="foot">${esc((D.version||{})['버전']||'')} · 배포 ${esc(((D.version||{})['배포일']||'').replace(/-/g,'.'))}<br>${esc((D.version||{})['자료기준']||'')} · 최근 반영 ${esc((D.version||{})['최근반영']||'')}<br>주식회사 이티에스</p>`;
+  <p class="foot">${verLine(true)}</p>`;
 }
 function statusView(){
   return `<div class="card"><h3><span class="ic">✓</span>내 교육 이수 상태</h3>
@@ -470,7 +484,7 @@ function trainView(){
   if(T.finished) return doneView();
   if(!T.started){
     return `<div class="card">
-      <h3><span class="ic">▶</span>LGES 현장 투입 전 안전교육</h3>
+      <h3><span class="ic">▶</span>LGES 현장 출입 전 안전교육</h3>
       <p style="margin:0 0 10px;font-size:14px">LG에너지솔루션 협의체 자료와 내규에서 가장 중요한 내용만 ${n}장으로 정리했습니다. 한 장당 <b>${sec}초</b> 이상 읽어야 다음 장으로 넘어갑니다.</p>
       <ul class="list" style="font-size:14px;color:var(--mute)">
         <li>소요시간 약 ${Math.ceil(n*sec/60)}분 · 중간에 나가면 처음부터 다시 시작</li>
@@ -492,7 +506,7 @@ function trainView(){
     <div class="img">${img}</div>
     <div class="body">
       <div class="no">${T.i+1} / ${n}</div>
-      <h2>${esc(s['제목'])}</h2>
+      <h2>${dash(s['제목'])}</h2>
       <ul>${li}</ul>
       <div class="src">${esc(s['출처'])}</div>
       <div class="ctr">
@@ -529,7 +543,7 @@ function doneView(){
       <div class="ok">✓</div><h2 style="margin:0 0 6px">교육 이수 완료</h2>
       <p style="margin:0;color:var(--mute);font-size:14px"><b style="color:var(--ink)">${esc(T.sent.name)}</b>님 (${esc(T.sent.company)})</p>
       <div class="kv" style="justify-content:center;margin:14px auto 0;max-width:260px;text-align:left"><b>이수일</b><span>${fmt(new Date().toISOString())}</span><b>유효기간</b><span><b>${esc(T.sent.expire)}</b>까지</span></div>
-      ${T.sent.queued?`<div class="alert" style="text-align:left;margin-top:14px"><b>통신 상태가 좋지 않아 기록을 폰에 저장했습니다.</b><br>통신이 되는 곳에서 이 앱을 다시 열면 자동으로 전송됩니다 (앱을 닫아도 기록은 폰에 남습니다). 전송되면 확인 메일이 갑니다.</div>`:`<p style="font-size:13px;color:var(--mute);margin:14px 0 0">이수 확인 메일을 ${esc(T.sent.email)}로 보냈습니다. 생산관리에서 확인 후 현장 투입됩니다.</p>`}
+      ${T.sent.queued?`<div class="alert" style="text-align:left;margin-top:14px"><b>통신 상태가 좋지 않아 기록을 폰에 저장했습니다.</b><br>통신이 되는 곳에서 이 앱을 다시 열면 자동으로 전송됩니다 (앱을 닫아도 기록은 폰에 남습니다). 전송되면 확인 메일이 갑니다.</div>`:`<p style="font-size:13px;color:var(--mute);margin:14px 0 0">이수 확인 메일을 ${esc(T.sent.email)}로 보냈습니다. 생산관리 확인 후 고객사 현장에 출입할 수 있습니다.</p>`}
       <button class="btn ghost" style="margin-top:14px" onclick="T={};go('home')">홈으로</button></div>`;
   return `<div class="prog"><i style="width:100%"></i></div>
   <div class="card f">
@@ -614,8 +628,8 @@ function penaltyView(){
   const lv=D.onestrike.filter(o=>/^작업중지 Level|^누적/.test(o['구분']));
   return `<div class="alert"><b>26년 7월 1일 감점기준 전면 개정</b> — 위험성평가 미실시·추락방지·LOTO·인터락 해제·밀폐 환기 등 주요 항목이 <b>20점 + 작업중지</b>로 상향됐습니다. 누적 20점부터 사후조치, 70점 이상 입찰제한~거래중지.</div>
   <div class="chips">${cats.map(c=>`<button class="${T.pcat===c?'on':''}" onclick="T.pcat='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
-  <div class="card" style="padding:6px 10px"><table><thead><tr><th style="width:52px">코드</th><th>세부항목</th><th style="text-align:right">감점</th></tr></thead><tbody>
-  ${rows.map(p=>`<tr><td style="color:var(--mute);font-size:12px">${esc(p['코드'])}</td><td>${esc(p['세부항목'])}${p['작업중지']?' <span class="pill red" style="font-size:10px">중지</span>':''}${(p['변경']==='상향')?` <span class="pill amber" style="font-size:10px">${esc(p['구감점_25년9월'])}→</span>`:''}</td><td class="n" style="color:${Number(String(p['감점']).split('/')[0])>=10?'var(--red)':'var(--ink)'}">${esc(p['감점'])}</td></tr>`).join('')}
+  <div class="card" style="padding:6px 10px"><table><thead><tr><th style="width:52px">코드</th><th>세부항목</th><th class="n">감점</th></tr></thead><tbody>
+  ${rows.map(p=>`<tr><td style="color:var(--mute);font-size:12px">${esc(p['코드'])}</td><td>${esc(p['세부항목'])}${p['작업중지']?' <span class="pill red" style="font-size:10px">중지</span>':''}${(p['변경']==='상향')?` <span class="pill amber" style="font-size:10px">${esc(p['구감점_25년9월'])}→</span>`:''}</td><td class="n${String(p['감점']).includes('/')?' multi':''}" style="color:${Number(String(p['감점']).split('/')[0])>=10?'var(--red)':'var(--ink)'}">${esc(String(p['감점']).replace(/\//g,'/\u200b'))}</td></tr>`).join('')}
   </tbody></table><div class="src">${esc(rows[0]?.['출처']||'')}</div></div>
   <div class="sec">작업중지 Level · 누적 점수 사후조치</div>
   ${lv.map(o=>`<div class="card" style="padding:12px 14px"><div class="tag"><span class="pill ${/Level 3|70점|50점/.test(o['구분'])?'red':/Level 2|30점/.test(o['구분'])?'amber':''}">${esc(o['구분'])}</span></div><h4 style="margin:4px 0">${esc(o['위반내역'])}</h4><p class="sub">${esc(o['협력사페널티'])}</p>${o['비고']?`<p class="sub">${esc(o['비고'])}</p>`:''}</div>`).join('')}
