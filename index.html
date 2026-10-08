@@ -63,9 +63,8 @@ ol.list li,ul.list li{margin:5px 0}
 .sbox input{width:100%;padding:14px 44px 14px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:15px;outline:none}
 .sbox input:focus{border-color:var(--g)}
 .sbox svg{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:22px;height:22px;stroke:var(--mute);fill:none;stroke-width:2}
-.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:8px;margin-bottom:6px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chips button{flex:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:6px;margin-bottom:6px}
+.chips button{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
 .chips button.on{background:var(--g);color:#fff;border-color:var(--g)}
 .res .card{padding:14px}
 .res h4{margin:0 0 6px;font-size:14.5px;line-height:1.4}
@@ -121,6 +120,25 @@ td.n{text-align:right;white-space:nowrap;font-weight:700}
 .stop{margin-top:10px;background:var(--red-bg);border-radius:10px;padding:8px 10px;font-size:12.5px;color:var(--ink)}
 .stop b{color:var(--red);display:block;margin-bottom:2px}
 .cap{font-size:11px;color:var(--mute);text-align:center;margin-top:8px}
+.ops .card{border-left:4px solid var(--g)}
+.kwc{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 2px}
+.kwc span{font-size:11px;background:#f1f4f2;color:var(--mute);border-radius:6px;padding:2px 7px}
+.ob{margin:8px 0 0;padding:0;list-style:none}
+.ob li{position:relative;padding-left:14px;margin:5px 0;font-size:13.5px;line-height:1.5}
+.ob li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--g)}
+.ob li.h{padding-left:0;font-weight:700;color:var(--g);margin-top:8px}
+.ob li.h:before{display:none}
+.more{color:var(--g);font-size:13px;font-weight:700;background:none;padding:6px 0}
+.viewer{position:fixed;inset:0;background:#111;z-index:100;display:flex;flex-direction:column}
+.viewer .vh{color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:14px;background:#000;padding-top:max(10px,env(safe-area-inset-top))}
+.viewer .vh b{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer .vh button{background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 12px}
+.viewer .vb{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+.viewer .vb img{display:block;width:100%;min-width:100%;margin-bottom:6px}
+.viewer .tip{color:#aaa;font-size:12px;text-align:center;padding:6px}
+.home-ops{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.home-ops button{background:#fff;border-radius:12px;padding:10px 12px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:13px;line-height:1.35}
+.home-ops button small{display:block;color:var(--g);font-weight:700;font-size:11px}
 .noimg{padding:28px 20px;text-align:center;width:100%;background:linear-gradient(135deg,var(--g3),#fff)}
 .noimg .big{font-size:44px;line-height:1}
 .steps{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:8px}
@@ -151,6 +169,7 @@ td.n{text-align:right;white-space:nowrap;font-weight:700}
     <button data-v="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>홈</button>
     <button data-v="train" onclick="go('train')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>교육</button>
     <button data-v="search" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>검색</button>
+    <button data-v="ops" onclick="go('ops')"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h8M8 8h4"/></svg>규정</button>
     <button data-v="penalty" onclick="go('penalty')"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></svg>벌점표</button>
   </div></nav>
 </div>
@@ -193,6 +212,7 @@ function render(){
   else if(view==='train') m.innerHTML=trainView();
   else if(view==='search'){ m.innerHTML=searchView(); const i=$('#q'); if(i){ i.value=T.q||''; i.oninput=()=>{T.q=i.value; renderResults();}; renderResults(); } }
   else if(view==='penalty') m.innerHTML=penaltyView();
+  else if(view==='ops') m.innerHTML=opsView();
   else if(view==='detail') m.innerHTML=detailView();
   if(view==='train' && T.started && !T.finished) startTimer();
 }
@@ -239,6 +259,11 @@ function homeView(){
       <b>주말 허가서</b><span>08~09시 / 13~13:30 발급</span>
       <b>방재센터</b><span><a href="tel:0432197119">EP1 043-219-7119</a> · <a href="tel:0437180119">EP2 043-718-0119</a></span>
     </div>
+  </div>
+  <div class="card">
+    <h3><span class="ic">📄</span>LG 규정 원문 (OPS) <span class="pill gray">${(D.ops||[]).length}건</span></h3>
+    <div class="home-ops">${(D.ops||[]).filter(o=>/^OPS/.test(o['코드'])).slice(0,6).map(o=>`<button onclick="go('ops','${esc(o['코드'])}')"><small>${esc(o['코드'])}</small>${esc(o['제목'])}</button>`).join('')}</div>
+    <button class="btn ghost sm" style="margin-top:10px" onclick="go('ops')">전체 규정 보기</button>
   </div>
   <div class="card">
     <h3><span class="ic">↻</span>최근 규정 변경</h3>
@@ -379,7 +404,7 @@ function searchView(){
   const chips=['전체',...TYPES().map(t=>t.replace(/\(.*\)/,'')),'공통수칙','벌점'];
   if(T.arg){ T.q=T.arg; T.arg=null; T.chip='전체'; }
   if(!T.chip) T.chip='전체';
-  return `<div class="sbox"><input id="q" placeholder="작업명·키워드 검색 (예: 사다리, LOTO, 그라인더, 흡연)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+  return `<div class="sbox"><input id="q" placeholder="검색 (예: 고소작업, LOTO, 그라인더, 안전대, 크레인)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
   <div class="chips">${chips.map(c=>`<button class="${T.chip===c?'on':''}" onclick="T.chip='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
   <div class="res" id="res"></div>`;
 }
@@ -388,6 +413,15 @@ function hit(q, ...fields){ if(!q) return true; const qs=norm(q).split(/[,\/]/).
 function renderResults(){
   const box=$('#res'); if(!box) return; const q=(T.q||'').trim(); const chip=T.chip||'전체'; let html='';
   const newBadge = d => isNew(d)?'<span class="pill red">변경됨</span>':'';
+  // OPS 규정 원문 (최우선)
+  if(chip!=='공통수칙'&&chip!=='벌점'){
+    let O=(D.ops||[]);
+    if(chip!=='전체') O=O.filter(o=>hit(chip,o['제목'],o['분류'],o['연관검색어'],o['내용']));
+    O=O.filter(o=>hit(q,o['코드'],o['제목'],o['분류'],o['연관검색어'],o['내용']));
+    const sc=o=>(hit(q,o['코드'],o['제목'])?100:0)+(hit(q,o['연관검색어'])?50:0)+(hit(q,o['분류'])?30:0)+(/^OPS/.test(o['코드'])?1:0);
+    if(q) O.sort((a,b)=>sc(b)-sc(a));
+    if(O.length&&(q||chip!=='전체')){ html+='<div class="sec">LG 규정 원문 (OPS) '+O.length+'</div><div class="ops">'+O.map(o=>opsCard(o,false)).join('')+'</div>'; }
+  }
   // 작업별수칙
   let W=D.worktypes.filter(w=>(w['상태']||'유효')==='유효');
   if(chip!=='전체'&&chip!=='공통수칙'&&chip!=='벌점') W=W.filter(w=>w['작업유형'].startsWith(chip));
@@ -421,6 +455,40 @@ function penaltyCard(p){
   return `<div class="card"><div class="ptrow"><div><div class="tag"><span class="pill gray">${esc(p['코드'])} ${esc(p['대분류'])}</span>${p['작업중지']?'<span class="pill red">작업중지</span>':''}${up?`<span class="pill amber">${esc(p['변경'])}</span>`:''}</div><h4 style="margin:0">${esc(p['세부항목'])}</h4></div><div class="pt">${esc(p['감점'])}<small>점</small></div></div>
   ${up?`<p class="sub" style="margin-top:6px">26.7.1 개정 전 ${esc(p['구감점_25년9월'])}점 → <b>${esc(p['감점'])}점</b></p>`:''}<div class="src">${esc(p['출처'])}</div></div>`;
 }
+
+
+/* ===== 규정 원문 (OPS) ===== */
+function opsCard(o, full){
+  const kws=String(o['연관검색어']||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const items=String(o['내용']||'').split('|').map(x=>x.trim()).filter(Boolean);
+  const show=full?items:items.slice(0,3);
+  const li=show.map(x=>/^\[.+\]$/.test(x)?`<li class="h">${esc(x.replace(/^\[|\]$/g,''))}</li>`:`<li>${esc(x)}</li>`).join('');
+  const imgs=String(o['원문이미지']||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const id='o'+String(o['코드']).replace(/[^\w]/g,'');
+  return `<div class="card" id="${id}"><div class="tag"><span class="pill">${esc(o['코드'])}</span><span class="pill gray">${esc(o['분류'])}</span>${o['재개정일']?`<span style="font-size:11px;color:var(--mute)">${esc(o['재개정일'])} ${esc(o['개정번호']||'')}</span>`:''}${isNew(o['적용시작일'])?'<span class="pill red">변경됨</span>':''}</div>
+  <h4 style="font-size:15.5px">${esc(o['제목'])}</h4>
+  ${kws.length?`<div class="kwc">${kws.slice(0,8).map(k=>`<span>${esc(k)}</span>`).join('')}</div>`:''}
+  <ul class="ob">${li}</ul>
+  ${!full&&items.length>3?`<button class="more" onclick="go('ops','${esc(o['코드'])}')">전체 ${items.length}개 항목 보기 →</button>`:''}
+  <div class="row" style="margin-top:10px">${imgs.length?`<button class="btn sm" onclick='openViewer(${JSON.stringify(imgs)},${JSON.stringify(String(o['코드'])+' '+String(o['제목']))})'>📄 LG 원문 보기 (${imgs.length}p)</button>`:''}</div>
+  <div class="src">${esc(o['출처'])}</div></div>`;
+}
+function opsView(){
+  const list=D.ops||[]; const focus=T.arg; T.arg=null;
+  if(focus){ const o=list.find(x=>String(x['코드'])===String(focus)); if(o) return `<div class="ops">${opsCard(o,true)}<button class="btn ghost" onclick="go('ops')">규정 목록으로</button></div>`; }
+  const groups={}; list.forEach(o=>{ const g=String(o['분류']||'').split('-')[0]||'기타'; (groups[g]=groups[g]||[]).push(o); });
+  const order=['작업종류','공사설비','PPE','고위험작업','안전작업허가서','작업허가서','작업시간','면허제도','작업중지','비상','기타'];
+  const keys=Object.keys(groups).sort((a,b)=>(order.indexOf(a)+99)%99-(order.indexOf(b)+99)%99);
+  return `<div class="alert" style="background:var(--g3);border-color:var(--g)"><b>LG에너지솔루션 공사안전 OPS·규정 원문</b> — 협의체 자료에 공유된 ${list.length}건. 제목을 누르면 전체 내용, "원문 보기"를 누르면 LG 자료 페이지를 확대해서 볼 수 있습니다.</div>
+  ${keys.map(k=>`<div class="sec">${esc(k)}</div><div class="card" style="padding:4px 14px">${groups[k].map(o=>`<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="go('ops','${esc(o['코드'])}')"><span class="pill" style="flex:none">${esc(o['코드'])}</span><span style="flex:1;font-size:14px">${esc(o['제목'])}${isNew(o['적용시작일'])?' <span class="pill red">변경됨</span>':''}<div style="font-size:11.5px;color:var(--mute)">${esc(o['분류'])} · ${esc(o['재개정일']||'')}</div></span><span style="color:var(--mute)">›</span></div>`).join('')}</div>`).join('')}`;
+}
+function openViewer(imgs,title){
+  const v=document.createElement('div'); v.className='viewer'; v.id='viewer';
+  v.innerHTML=`<div class="vh"><b>${esc(title)}</b><button onclick="closeViewer()">닫기 ✕</button></div><div class="vb">${imgs.map(i=>`<img src="${IMG}ops/${esc(i)}" alt="">`).join('')}<div class="tip">두 손가락으로 확대해서 보세요 · 출처: LG에너지솔루션 공사업체 안전보건 협의회 자료</div></div>`;
+  document.body.appendChild(v); document.body.style.overflow='hidden'; history.pushState({v:1},'');
+}
+function closeViewer(){ const v=$('#viewer'); if(v){ v.remove(); document.body.style.overflow=''; } }
+window.addEventListener('popstate',()=>closeViewer());
 
 /* ===== 벌점표 ===== */
 function penaltyView(){
