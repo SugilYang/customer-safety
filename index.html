@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>LGES 현장 안전 — ETS</title>
+<title>LG 현장 안전 — ETS</title>
 <meta name="theme-color" content="#00806F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -157,143 +157,242 @@ td.n{text-align:right;white-space:nowrap;font-weight:700}
 .foot{text-align:center;font-size:11px;color:var(--mute);padding:14px 0 0}
 .hid{display:none!important}
 @media (min-width:600px){main{padding:20px 20px 100px}}
+
+/* ---- 새 홈/검색 ---- */
+.hsearch{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);margin-bottom:12px}
+.hsearch h2{margin:0 0 10px;font-size:19px;line-height:1.3}
+.hsearch .sbox{margin-bottom:10px}
+.topics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.topics button{background:var(--g3);border-radius:12px;padding:10px 4px 8px;font-size:12px;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.2}
+.topics button span{font-size:22px}
+.hero2{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#00806F,#0A5A4E);color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px;text-align:left;width:100%}
+.hero2 .i{font-size:30px;flex:none}
+.hero2 b{display:block;font-size:16px}
+.hero2 small{opacity:.9;font-size:12.5px;display:block;margin-top:2px}
+.hero2 .go{margin-left:auto;background:#fff;color:var(--g);border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;flex:none}
+.acc{background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:10px;overflow:hidden}
+.acc>button{width:100%;background:none;text-align:left;padding:14px 16px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--ink)}
+.acc>button .ar{margin-left:auto;color:var(--mute);transition:transform .2s}
+.acc.open>button .ar{transform:rotate(90deg)}
+.acc .bd{display:none;padding:0 16px 14px}
+.acc.open .bd{display:block}
+.emg{display:flex;gap:8px;margin-bottom:12px}
+.emg a{flex:1;background:#fff;border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:center;gap:8px;font-size:13px}
+.emg a b{display:block;font-size:14px;color:var(--red)}
+/* 답변 카드 */
+.gcard{background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:12px;overflow:hidden}
+.gcard .gh{padding:16px 16px 12px;display:flex;gap:12px;align-items:flex-start}
+.gcard .gh .ic{font-size:34px;line-height:1;flex:none}
+.gcard .gh h2{margin:0;font-size:19px;line-height:1.25}
+.gcard .gh p{margin:4px 0 0;font-size:14px;color:var(--red);font-weight:700;line-height:1.4}
+.gsec{padding:10px 16px 4px}
+.gsec h5{margin:0 0 6px;font-size:13px;letter-spacing:.2px;display:flex;align-items:center;gap:6px}
+.gsec.do h5{color:#1B6E4A}.gsec.dont h5{color:var(--red)}.gsec.viol h5{color:var(--amber)}
+.gsec ul{margin:0;padding:0;list-style:none}
+.gsec li{position:relative;padding-left:22px;margin:0 0 7px;font-size:14.5px;line-height:1.5}
+.gsec li:before{position:absolute;left:0;top:1px;font-size:14px}
+.gsec.do li:before{content:"✓";color:#1B6E4A;font-weight:900}
+.gsec.dont li:before{content:"✕";color:var(--red);font-weight:900}
+.gsec.viol li:before{content:"!";color:var(--amber);font-weight:900;left:4px}
+.gsec.viol{background:var(--amber-bg);margin:8px 12px 0;border-radius:10px;padding:10px 12px}
+.gsec.viol li{font-size:13.5px;margin-bottom:5px}
+.chip{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--red-bg);color:var(--red);vertical-align:middle;margin:0 1px;white-space:nowrap}
+.chip.pt{background:#eef1ef;color:var(--ink)}
+.chip.red{background:var(--red);color:#fff}
+.gimg{margin:10px 16px 0;border-radius:10px;overflow:hidden;background:#eef1ef}
+.gimg img{width:100%;display:block}
+.gfoot{padding:12px 16px 14px}
+.gfoot .btn{margin-top:6px}
+.refs{font-size:12.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.refs span{background:#f1f4f2;border-radius:6px;padding:2px 7px;color:var(--ink)}
+.sugg{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:-6px 0 12px;overflow:hidden}
+.sugg button{display:block;width:100%;text-align:left;background:none;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+.sugg button b{color:var(--g)}
+.sugg button small{color:var(--mute);margin-left:6px;font-size:12px}
+.more-list button{width:100%;background:#fff;border-radius:12px;padding:14px 16px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:8px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink)}
+.more-list button span{font-size:22px}
+.more-list button small{display:block;color:var(--mute);font-size:12px;font-weight:400;margin-top:1px}
+.more-list button i{margin-left:auto;font-style:normal;color:var(--mute)}
 </style>
 </head>
 <body>
 <div class="app">
   <header class="top">
     <div class="logo"><span class="lg"><img src="img/ets_logo.png" alt="ETS" onerror="this.parentNode.outerHTML='<span class=wm>ETS</span>'"></span></div>
-    <div class="t">LGES 현장 안전<small>고객사 투입 전 교육 · 안전수칙 검색</small></div>
-    <button class="back hid" id="backBtn" onclick="go('home')">홈</button>
+    <div class="t">LG 현장 안전<small>협력사 작업자용 · 교육 · 작업수칙 검색</small></div>
+    <button class="back hid" id="backBtn" onclick="goBack()">‹ 뒤로</button>
   </header>
   <main id="main"></main>
   <nav class="nav"><div class="w">
     <button data-v="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>홈</button>
-    <button data-v="train" onclick="go('train')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>교육</button>
     <button data-v="search" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>검색</button>
-    <button data-v="ops" onclick="go('ops')"><svg viewBox="0 0 24 24"><path d="M4 4h12l4 4v12H4z"/><path d="M8 12h8M8 16h8M8 8h4"/></svg>규정</button>
-    <button data-v="penalty" onclick="go('penalty')"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM4 10h16M10 4v16"/></svg>벌점표</button>
+    <button data-v="train" onclick="go('train')"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>교육</button>
+    <button data-v="more" onclick="go('more')"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>더보기</button>
   </div></nav>
 </div>
 <div class="toast" id="toast"></div>
 <script src="data.js"></script>
 <script>
 /* ===== 설정 ===== */
-const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // 배포된 GAS 웹앱 URL (/exec)
+const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // GAS 웹앱 URL (교육이수 기록·설정값 전용)
 const IMG = 'img/';
-/* ================ */
-let D = null, view = 'home', T = {};
+/* 내용(가이드·규정·슬라이드·벌점표)은 data.js 에 있습니다. 매달 업데이트 = data.js 교체 */
+let D = null, view = 'home', T = {}, HIST = [];
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+// **굵게** 와 |칩| 표기 → HTML
+const rich = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\|([^|]+?)\|/g,(m,t)=>`<span class="chip ${/점$/.test(t)?'pt':(/퇴출|거래제한/.test(t)?'red':'')}">${t}</span>`);
 const toast = m => { const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2600); };
 const setting = (k,def) => (D && D.settings && D.settings[k]!==undefined && D.settings[k]!=='') ? D.settings[k] : def;
 const pd = d => { const m=String(d||'').match(/(\d{4})-(\d{2})-(\d{2})/); return m? new Date(+m[1],+m[2]-1,+m[3]) : new Date(d); };
-const daysSince = d => { if(!d) return 9e9; const x=pd(d); return Math.round((Date.now()-x)/86400000); };
-const isNew = d => { const n=daysSince(d); return n>=-400 && n<=Number(setting('변경됨_표시_일수',45)); }; // 시행 예정 포함
+const daysSince = d => { if(!d) return 9e9; return Math.round((Date.now()-pd(d))/86400000); };
+const isNew = d => { const n=daysSince(d); return n>=-400 && n<=Number(setting('변경됨_표시_일수',45)); };
 const fmt = d => String(d||'').slice(0,10);
 const hasGas = () => GAS_URL.startsWith('http');
 
 async function loadData(){
-  try{ const c=localStorage.getItem('lges_data'); if(c){ D=JSON.parse(c); } }catch(e){}
-  if(!D) D = window.FALLBACK_DATA;
-  else { const FB=window.FALLBACK_DATA||{}; Object.keys(FB).forEach(k=>{ if(Array.isArray(FB[k]) && FB[k].length && (!Array.isArray(D[k]) || !D[k].length)) D[k]=FB[k]; }); }
-  render();
+  D = window.FALLBACK_DATA; render();
   if(!hasGas()) return;
-  try{
+  try{ // 서버에서는 설정값만 받아옴 (장당_초, 유효기간 등)
     const r = await fetch(GAS_URL+'?action=data', {cache:'no-store'}); const j = await r.json();
-    if(j && j.slides){
-      // 서버에 아직 없는 탭(빈 배열/누락)은 내장 데이터로 보완
-      const FB=window.FALLBACK_DATA||{};
-      Object.keys(FB).forEach(k=>{ if(Array.isArray(FB[k]) && FB[k].length && (!Array.isArray(j[k]) || !j[k].length)) j[k]=FB[k]; });
-      if(!j.settings||!Object.keys(j.settings).length) j.settings=FB.settings;
-      D=j; try{ localStorage.setItem('lges_data', JSON.stringify(j)); }catch(e){} if(view!=='train' || !T.started) render(); }
-  }catch(e){ console.warn('data fetch fail', e); }
+    if(j && j.settings && Object.keys(j.settings).length){ D.settings = Object.assign({}, D.settings, j.settings); if(view!=='train') render(); }
+  }catch(e){ console.warn('settings fetch fail', e); }
 }
-
-function go(v, arg){ view=v; T.arg=arg; render(); window.scrollTo(0,0); }
-
+function go(v, arg){ if(v!==view||arg) HIST.push({view,arg:T.arg,q:T.q,chip:T.chip,pcat:T.pcat}); view=v; T.arg=arg; render(); window.scrollTo(0,0); }
+function goBack(){ const h=HIST.pop(); if(!h){ go('home'); return; } view=h.view; T.arg=h.arg; T.q=h.q; T.chip=h.chip; T.pcat=h.pcat; render(); window.scrollTo(0,0); }
 function render(){
-  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===view || (view==='result' && b.dataset.v==='train')));
+  const navMap={home:'home',search:'search',guide:'search',train:'train',result:'train',more:'more',ops:'more',penalty:'more',detail:'more',status:'more'};
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===navMap[view]));
   $('#backBtn').classList.toggle('hid', view==='home');
   const m=$('#main');
   if(view==='home') m.innerHTML=homeView();
+  else if(view==='search'){ m.innerHTML=searchView(); const i=$('#q'); if(i){ i.value=T.q||''; i.oninput=()=>{T.q=i.value; renderResults();}; i.onkeydown=e=>{ if(e.key==='Enter'){ i.blur(); } }; renderResults(); if(T.focus){ i.focus(); T.focus=false; } } }
+  else if(view==='guide') m.innerHTML=guideView();
   else if(view==='train') m.innerHTML=trainView();
-  else if(view==='search'){ m.innerHTML=searchView(); const i=$('#q'); if(i){ i.value=T.q||''; i.oninput=()=>{T.q=i.value; renderResults();}; renderResults(); } }
-  else if(view==='penalty') m.innerHTML=penaltyView();
+  else if(view==='more') m.innerHTML=moreView();
   else if(view==='ops') m.innerHTML=opsView();
+  else if(view==='penalty') m.innerHTML=penaltyView();
   else if(view==='detail') m.innerHTML=detailView();
+  else if(view==='status') m.innerHTML=statusView();
   if(view==='train' && T.started && !T.finished) startTimer();
 }
+const TOPICS = () => (D.guides||[]).slice(0,12);
 
 /* ===== 홈 ===== */
 function homeView(){
   const os = D.onestrike.filter(r=>r['구분']==='One Strike Out');
-  const changes = [...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1).slice(0,3);
-  const sec = Number(setting('장당_초',30)); const n=D.slides.length;
   return `
-  <div class="hero">
-    <h2>고객사 현장 투입 전<br>안전교육을 받으세요</h2>
-    <p>LG에너지솔루션 사업장 공사·셋업 작업자 필수. 이수 후 ${esc(setting('유효기간_개월',6))}개월간 유효합니다.</p>
-    <button class="btn" onclick="go('train')">교육 시작하기</button>
-    <div class="meta"><span>📑 ${n}장</span><span>⏱ 약 ${Math.ceil(n*sec/60)}분</span><span>✉️ 이수 확인 메일 발송</span></div>
+  <div class="hsearch">
+    <h2>어떤 작업 하세요?</h2>
+    <div class="sbox"><input id="hq" placeholder="예: 사다리, 그라인더, 지게차, LOTO" onfocus="T.focus=true;go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+    <div class="topics">${TOPICS().map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['짧은이름']||g['제목'])}</button>`).join('')}</div>
   </div>
-  <div class="quick">
-    <button onclick="go('search','장비 셋업')"><span>🔧</span>셋업 작업수칙</button>
-    <button onclick="go('search','LOTO')"><span>🔒</span>LOTO·전기</button>
-    <button onclick="go('search','화기')"><span>🔥</span>화기작업</button>
-    <button onclick="go('search','고소')"><span>🪜</span>고소작업</button>
-    <button onclick="go('search','중장비')"><span>🏗️</span>중장비·지게차</button>
-    <button onclick="go('penalty')"><span>⚠️</span>벌점표</button>
-  </div>
-  <div class="card">
-    <h3><span class="ic">!</span>One Strike Out — 1회 적발 시 즉시 퇴출 <span class="pill red">26.10.1 시행</span></h3>
-    <ol class="list">${os.map(r=>`<li>${esc(r['위반내역'])}</li>`).join('')}</ol>
-    <p style="margin:10px 0 0;font-size:13.5px"><b>근로자</b> 영구 퇴출 · <b>협력사</b> 거래제한 1회 1개월 / 2회 3개월 / 3회 영구</p>
-    <div class="src">${esc(os[0]?.['출처']||'')}</div>
-  </div>
-  <div class="card">
-    <h3><span class="ic">7</span>7대 고위험 작업 — 전일 14~15시 사전신고</h3>
-    <div class="row" style="align-items:flex-start">
-      <div style="flex:1;font-size:14px">3m 이상 고소작업 · 아크/산소절단 · 3m 이상 화기작업 · 활성화 공정 · 전기실 작업 · 밀폐작업 · 고중량(15T↑ 지게차 / 20T↑ 크레인)<div style="margin-top:6px;font-size:13px;color:var(--mute)">카카오 사전신고방 참여코드 <b style="color:var(--ink)">2119</b></div></div>
-      <img src="${IMG}s10_highrisk7.jpg" style="width:86px;border-radius:8px" alt="">
+  <button class="hero2" onclick="go('train')"><span class="i">▶</span><span><b>처음 투입이면 교육부터</b><small>${D.slides.length}장 · 약 ${Math.ceil(D.slides.length*Number(setting('장당_초',30))/60)}분 · 이수 후 ${esc(setting('유효기간_개월',6))}개월 유효</small></span><span class="go">시작</span></button>
+  <div class="acc" id="accOS"><button onclick="this.parentNode.classList.toggle('open')">⛔ 이것만은 절대 — 1회 적발 시 퇴출 7가지<span class="ar">›</span></button>
+    <div class="bd"><ol class="list" style="font-size:14px">${os.map(r=>`<li>${esc(r['위반내역'])}</li>`).join('')}</ol>
+    <p style="margin:8px 0 0;font-size:13px;color:var(--mute)">근로자 영구 퇴출 · 회사 거래제한 (26.10.1 시행, LG에너지솔루션 One Strike Out)</p></div></div>
+  <div class="emg"><a href="tel:0432197119">☎<span>방재센터 EP1<b>043-219-7119</b></span></a><a href="tel:0437180119">☎<span>방재센터 EP2<b>043-718-0119</b></span></a></div>
+  <p class="foot">주식회사 이티에스 · LG에너지솔루션 협의체 자료 기준 (25.6~26.9)</p>`;
+}
+
+/* ===== 검색 ===== */
+function norm(s){ return String(s||'').toLowerCase().replace(/\s+/g,''); }
+function hit(q, ...fields){ if(!q) return true; const qs=norm(q).split(/[,\/]/).filter(Boolean); const hay=norm(fields.join(' ')); return qs.some(x=>hay.includes(x)); }
+function searchView(){
+  if(T.arg){ T.q=T.arg; T.arg=null; }
+  return `<div class="sbox"><input id="q" placeholder="작업명으로 검색 (예: 사다리, 용접, 지게차)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+  <div id="sugg"></div><div class="res" id="res"></div>`;
+}
+function guideScore(g,q){ const n=norm(q); if(!n) return 0; let s=0; if(norm(g['제목']).includes(n)) s+=100; if(norm(g['검색어']).split(',').some(w=>w.includes(n)||n.includes(w)&&w.length>1)) s+=60; if(norm(g['한줄']).includes(n)) s+=20; if(norm(g['하세요'].join(' ')+g['금지'].join(' ')).includes(n)) s+=10; return s; }
+function renderResults(){
+  const box=$('#res'), sg=$('#sugg'); if(!box) return; const q=(T.q||'').trim();
+  if(!q){ sg.innerHTML=''; box.innerHTML=`<div class="sec">자주 찾는 작업</div><div class="card" style="padding:12px"><div class="topics" style="grid-template-columns:repeat(3,1fr)">${(D.guides||[]).map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['제목'])}</button>`).join('')}</div></div>`; return; }
+  const G=(D.guides||[]).map(g=>[guideScore(g,q),g]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]);
+  sg.innerHTML = G.length>1 ? `<div class="sugg">${G.slice(0,5).map(g=>`<button onclick="go('guide','${g.id}')">${g['아이콘']} <b>${esc(g['제목'])}</b><small>${esc(g['한줄'])}</small></button>`).join('')}</div>` : '';
+  let html='';
+  if(G.length){ html+=guideCard(G[0], false); if(G.length>1) html+=`<div class="sec">관련 작업</div>`+G.slice(1,4).map(g=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${g.id}')"><b>${g['아이콘']} ${esc(g['제목'])}</b><div style="font-size:13px;color:var(--mute)">${esc(g['한줄'])}</div></div>`).join(''); }
+  // 가이드가 없을 때만 규정·벌점 직접 검색
+  if(!G.length){
+    const O=(D.ops||[]).filter(o=>hit(q,o['코드'],o['제목'],o['분류'],o['연관검색어'],o['내용']));
+    if(O.length) html+='<div class="sec">LG 규정 원문</div><div class="ops">'+O.slice(0,5).map(o=>opsCard(o,false)).join('')+'</div>';
+    const P=D.penalty.filter(p=>hit(q,p['대분류'],p['세부항목'],p['키워드'],p['코드']));
+    if(P.length) html+='<div class="sec">벌점표</div>'+P.slice(0,8).map(p=>penaltyCard(p)).join('');
+    const C=D.common.filter(c=>hit(q,c['구분'],c['항목'],c['내용']));
+    if(C.length) html+='<div class="sec">사업장 공통수칙</div>'+C.map(c=>`<div class="card"><h4>${esc(c['항목'])}</h4><p>${esc(c['내용'])}</p><div class="src">${esc(c['출처'])}</div></div>`).join('');
+  }
+  if(!html) html=`<div class="empty">"${esc(q)}" 검색 결과가 없습니다.<br><span style="font-size:13px">작업 이름(예: 사다리, 용접, 지게차)으로 검색하거나 아래 목록에서 골라 보세요.</span></div><div class="card" style="padding:12px"><div class="topics" style="grid-template-columns:repeat(3,1fr)">${(D.guides||[]).map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['제목'])}</button>`).join('')}</div></div>`;
+  box.innerHTML=html;
+}
+function guideCard(g, full){
+  const pens=(g['벌점코드']||[]).map(c=>D.penalty.find(p=>p['코드']===c)).filter(Boolean);
+  const opsL=(g['근거OPS']||[]).map(c=>(D.ops||[]).find(o=>o['코드']===c)).filter(Boolean);
+  const li=(arr,cls)=>`<ul>${arr.map(x=>`<li>${rich(x)}</li>`).join('')}</ul>`;
+  return `<div class="gcard">
+    <div class="gh"><span class="ic">${g['아이콘']}</span><div><h2>${esc(g['제목'])}</h2><p>${esc(g['한줄'])}</p></div></div>
+    <div class="gsec do"><h5>✅ 이렇게 하세요</h5>${li(g['하세요'])}</div>
+    <div class="gsec dont"><h5>⛔ 하면 안 됩니다</h5>${li(g['금지'])}</div>
+    ${g['위반']&&g['위반'].length?`<div class="gsec viol"><h5>⚠️ 위반하면</h5>${li(g['위반'])}</div>`:''}
+    ${g['이미지']?`<div class="gimg"><img src="${IMG}${esc(g['이미지'])}" alt="" loading="lazy"></div>`:''}
+    <div class="gfoot">
+      ${opsL.length||pens.length?`<div class="refs">근거 ${opsL.map(o=>`<span>${esc(o['코드'])} ${esc(o['제목'])}</span>`).join('')}${pens.map(p=>`<span>벌점표 ${esc(p['코드'])}</span>`).join('')}</div>`:''}
+      ${opsL.length?`<button class="btn ghost" onclick="go('guide','${g.id}');setTimeout(()=>{const e=document.getElementById('gops');if(e){e.classList.add('open');e.scrollIntoView({behavior:'smooth'});}},50)">📄 LG 원문 보기 (${opsL.length}건)</button>`:''}
+      ${!full?`<button class="btn" style="margin-top:8px" onclick="go('guide','${g.id}')">자세히 보기</button>`:''}
     </div>
-    <div class="src">26년 8·9월 협의체</div>
-  </div>
-  <div class="card">
-    <h3><span class="ic">☎</span>작업시간 · 비상연락</h3>
-    <div class="kv">
-      <b>작업 시작</b><span>09:00 (LG 담당자 협의 시 06:00~09:00)</span>
-      <b>연장 작업</b><span>17~22시, 당일 17시까지 승인 · 고위험 불가</span>
-      <b>주말 허가서</b><span>08~09시 / 13~13:30 발급</span>
-      <b>방재센터</b><span><a href="tel:0432197119">EP1 043-219-7119</a> · <a href="tel:0437180119">EP2 043-718-0119</a></span>
-    </div>
-  </div>
-  <div class="card">
-    <h3><span class="ic">📄</span>LG 규정 원문 (OPS) <span class="pill gray">${(D.ops||[]).length}건</span></h3>
-    <div class="home-ops">${(D.ops||[]).filter(o=>/^OPS/.test(o['코드'])).slice(0,6).map(o=>`<button onclick="go('ops','${esc(o['코드'])}')"><small>${esc(o['코드'])}</small>${esc(o['제목'])}</button>`).join('')}</div>
-    <button class="btn ghost sm" style="margin-top:10px" onclick="go('ops')">전체 규정 보기</button>
-  </div>
-  <div class="card">
-    <h3><span class="ic">↻</span>최근 규정 변경</h3>
-    ${changes.map(c=>`<div style="display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--line);font-size:14px"><span style="flex:none;color:var(--mute);font-size:12.5px;width:84px;padding-top:2px">${esc(c['시행일'])}</span><span>${esc(c['내용'])} ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}</span></div>`).join('')}
-    <button class="btn ghost sm" style="margin-top:10px" onclick="go('detail','changes')">전체 변경 이력</button>
-  </div>
-  <div class="card">
-    <h3><span class="ic">✓</span>내 교육 이수 상태</h3>
+  </div>`;
+}
+function guideView(){
+  const g=(D.guides||[]).find(x=>x.id===T.arg) || (D.guides||[])[0]; if(!g) return '<div class="empty">가이드가 없습니다</div>';
+  const opsL=(g['근거OPS']||[]).map(c=>(D.ops||[]).find(o=>o['코드']===c)).filter(Boolean);
+  const pens=(g['벌점코드']||[]).map(c=>D.penalty.find(p=>p['코드']===c)).filter(Boolean);
+  const rel=(D.guides||[]).filter(x=>x.id!==g.id && (x['근거OPS']||[]).some(c=>(g['근거OPS']||[]).includes(c))).slice(0,3);
+  return guideCard(g,true)
+   + (opsL.length?`<div class="acc" id="gops"><button onclick="this.parentNode.classList.toggle('open')">📄 LG 규정 원문 (${opsL.length}건)<span class="ar">›</span></button><div class="bd"><div class="ops" style="margin-top:6px">${opsL.map(o=>opsCard(o,true)).join('')}</div></div></div>`:'')
+   + (pens.length?`<div class="acc"><button onclick="this.parentNode.classList.toggle('open')">⚠️ 관련 벌점 항목 (${pens.length})<span class="ar">›</span></button><div class="bd">${pens.map(p=>penaltyCard(p)).join('')}</div></div>`:'')
+   + (rel.length?`<div class="sec">함께 보면 좋은 작업</div>${rel.map(x=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${x.id}')"><b>${x['아이콘']} ${esc(x['제목'])}</b><div style="font-size:13px;color:var(--mute)">${esc(x['한줄'])}</div></div>`).join('')}`:'');
+}
+
+function penaltyCard(p){
+  const up = p['변경']==='상향'||p['변경']==='신설';
+  return `<div class="card"><div class="ptrow"><div><div class="tag"><span class="pill gray">${esc(p['코드'])} ${esc(p['대분류'])}</span>${p['작업중지']?'<span class="pill red">작업중지</span>':''}${up?`<span class="pill amber">${esc(p['변경'])}</span>`:''}</div><h4 style="margin:0">${esc(p['세부항목'])}</h4></div><div class="pt">${esc(p['감점'])}<small>점</small></div></div>
+  ${up?`<p class="sub" style="margin-top:6px">26.7.1 개정 전 ${esc(p['구감점_25년9월'])}점 → <b>${esc(p['감점'])}점</b></p>`:''}<div class="src">${esc(p['출처'])}</div></div>`;
+}
+
+/* ===== 더보기 ===== */
+function moreView(){
+  const items=[['📄','LG 규정 원문 (OPS)','협의체에 공유된 운영표준 '+(D.ops||[]).length+'건, 원문 페이지 보기','ops'],['⚠️','벌점표','위반 항목별 감점·작업중지 ('+D.penalty.length+'항목)','penalty'],['↻','규정 변경 이력 · 월별 강조사항','언제 무엇이 바뀌었는지','detail'],['✓','내 교육 이수 확인','이름 또는 연락처 뒤 4자리로 조회','status']];
+  const changes=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1).slice(0,2);
+  return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}</div>
+  <div class="sec">작업시간 · 사전신고</div>
+  <div class="card"><div class="kv">
+    <b>작업 시작</b><span>09:00 (LG 담당자 협의 시 06:00~09:00)</span>
+    <b>연장 작업</b><span>17~22시 · 일반 당일 17시, 크레인 당일 13시까지 승인 · 고위험 불가</span>
+    <b>주말 허가서</b><span>08~09시 / 13~13:30 발급 · 작업 08시부터</span>
+    <b>7대 고위험</b><span>전일 14~15시 사전신고방 (코드 2119) — 3m↑고소·화기·활성화·전기실·밀폐·고중량</span>
+  </div></div>
+  <div class="sec">최근 규정 변경</div>
+  ${changes.map(c=>`<div class="card" style="padding:12px 14px"><span style="font-size:12px;color:var(--mute)">${esc(c['시행일'])}</span> ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:14px;margin-top:2px">${esc(c['내용'])}</div></div>`).join('')}
+  <p class="foot">LG에너지솔루션 공사업체 안전보건 협의회 자료 (25.6~26.9) · 주식회사 이티에스</p>`;
+}
+function statusView(){
+  return `<div class="card"><h3><span class="ic">✓</span>내 교육 이수 상태</h3>
     <div class="row"><input id="chk" placeholder="이름 또는 연락처 뒤 4자리" style="flex:1;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px"><button class="btn sm" onclick="checkMe()">조회</button></div>
-    <div id="chkRes" style="margin-top:8px;font-size:13.5px"></div>
-  </div>
-  <p class="foot">자료 기준: LG에너지솔루션 공사업체 안전보건 협의회 (25.6~26.9) · 데이터 갱신 ${esc(fmt(D.generated)||'내장 데이터')}<br>주식회사 이티에스 · 경영관리</p>`;
+    <div id="chkRes" style="margin-top:8px;font-size:13.5px"></div></div>`;
 }
 async function checkMe(){
   const q=$('#chk').value.trim(); const box=$('#chkRes'); if(!q) return;
-  if(!hasGas()){ box.innerHTML='<span class="pill gray">서버 연결 전</span> 배포 후 사용 가능합니다.'; return; }
+  if(!hasGas()){ box.innerHTML='<span class="pill gray">서버 연결 전</span>'; return; }
   box.textContent='조회 중…';
   try{ const r=await fetch(GAS_URL+'?action=check&q='+encodeURIComponent(q)); const j=await r.json();
     if(!j.rows||!j.rows.length){ box.innerHTML='<span class="pill gray">기록 없음</span> 교육 이수 기록이 없습니다.'; return; }
     box.innerHTML=j.rows.map(r=>{ const left=Math.round((pd(r['만료일'])-new Date().setHours(0,0,0,0))/86400000); const st=left<0?'<span class="pill red">만료</span>':left<=30?'<span class="pill amber">만료 임박</span>':'<span class="pill">유효</span>';
       return `<div style="padding:6px 0;border-bottom:1px solid var(--line)">${st} <b>${esc(r['이름'])}</b> (${esc(r['업체명'])}) · 이수 ${esc(fmt(r['이수일시']))} · 만료 <b>${esc(fmt(r['만료일']))}</b></div>`; }).join('');
   }catch(e){ box.textContent='조회 실패. 네트워크를 확인하세요.'; }
+}
+function detailView(){
+  const ch=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1);
+  const hl=[...D.highlights].sort((a,b)=>b['월']<a['월']?-1:1);
+  return `<div class="sec">규정 변경 이력</div><div class="card" style="padding:8px 16px">${ch.map(c=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><span style="flex:none;color:var(--mute);font-size:12.5px;width:84px;padding-top:2px">${esc(c['시행일'])}</span><span>${esc(c['내용'])} ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:11.5px;color:var(--mute)">${esc(c['출처'])}</div></span></div>`).join('')}</div>
+  <div class="sec">월별 협의체 강조사항</div>${hl.map(h=>`<div class="card" style="padding:12px 14px"><div class="tag"><span class="pill gray">${esc(h['월'])}</span></div><h4 style="margin:4px 0 6px;font-size:14.5px">${esc(h['제목'])}</h4><p style="margin:0;font-size:13.5px">${esc(h['내용'])}</p><div class="src">${esc(h['출처'])}</div></div>`).join('')}`;
 }
 
 /* ===== 교육 ===== */
@@ -406,65 +505,6 @@ async function submitTrain(){
   T.sent={name,company,email,expire:exp.toISOString().slice(0,10),queued:true}; render(); window.scrollTo(0,0);
 }
 
-/* ===== 검색 ===== */
-const TYPES = () => [...new Set(D.worktypes.map(w=>w['작업유형']))];
-function searchView(){
-  const chips=['전체',...TYPES().map(t=>t.replace(/\(.*\)/,'')),'공통수칙','벌점'];
-  if(T.arg){ T.q=T.arg; T.arg=null; T.chip='전체'; }
-  if(!T.chip) T.chip='전체';
-  return `<div class="sbox"><input id="q" placeholder="검색 (예: 고소작업, LOTO, 그라인더, 안전대, 크레인)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
-  <div class="chips">${chips.map(c=>`<button class="${T.chip===c?'on':''}" onclick="T.chip='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
-  <div class="res" id="res"></div>`;
-}
-function norm(s){ return String(s||'').toLowerCase().replace(/\s+/g,''); }
-function hit(q, ...fields){ if(!q) return true; const qs=norm(q).split(/[,\/]/).filter(Boolean); const hay=norm(fields.join(' ')); return qs.some(x=>hay.includes(x)); }
-function renderResults(){
-  const box=$('#res'); if(!box) return; const q=(T.q||'').trim(); const chip=T.chip||'전체'; let html='';
-  const newBadge = d => isNew(d)?'<span class="pill red">변경됨</span>':'';
-  // OPS 규정 원문 (최우선)
-  if(chip!=='공통수칙'&&chip!=='벌점'){
-    let O=(D.ops||[]);
-    if(chip!=='전체') O=O.filter(o=>hit(chip,o['제목'],o['분류'],o['연관검색어'],o['내용']));
-    O=O.filter(o=>hit(q,o['코드'],o['제목'],o['분류'],o['연관검색어'],o['내용']));
-    const sc=o=>(hit(q,o['코드'],o['제목'])?100:0)+(hit(q,o['연관검색어'])?50:0)+(hit(q,o['분류'])?30:0)+(/^OPS/.test(o['코드'])?1:0);
-    if(q) O.sort((a,b)=>sc(b)-sc(a));
-    if(O.length&&(q||chip!=='전체')){ html+='<div class="sec">LG 규정 원문 (OPS) '+O.length+'</div><div class="ops">'+O.map(o=>opsCard(o,false)).join('')+'</div>'; }
-  }
-  // 작업별수칙
-  let W=D.worktypes.filter(w=>(w['상태']||'유효')==='유효');
-  if(chip!=='전체'&&chip!=='공통수칙'&&chip!=='벌점') W=W.filter(w=>w['작업유형'].startsWith(chip));
-  if(chip!=='공통수칙'&&chip!=='벌점'){
-    W=W.filter(w=>hit(q,w['작업유형'],w['수칙'],w['보호구'],w['사전절차'],w['키워드']));
-    if(W.length){ html+='<div class="sec">작업별 안전수칙 '+W.length+'</div>';
-      html+=W.map(w=>{ const codes=String(w['관련벌점코드']||'').split(',').map(x=>x.trim()).filter(Boolean).map(c=>D.penalty.find(p=>p['코드']===c)).filter(Boolean);
-        return `<div class="card"><div class="tag"><span class="pill">${esc(w['작업유형'])}</span>${newBadge(w['적용시작일'])}</div><h4>${esc(w['수칙'])}</h4>
-        ${w['보호구']?`<p class="sub">🦺 ${esc(w['보호구'])}</p>`:''}${w['사전절차']?`<p class="sub">📋 ${esc(w['사전절차'])}</p>`:''}
-        ${codes.length?`<p class="sub">⚠️ 위반 시 ${codes.map(c=>`<b style="color:var(--red)">${esc(c['세부항목'].slice(0,22))}${c['세부항목'].length>22?'…':''} ${esc(c['감점'])}점${c['작업중지']?'+중지':''}</b>`).join(' · ')}</p>`:''}
-        ${w['이미지']?`<img src="${IMG}${esc(w['이미지'])}" alt="" loading="lazy">`:''}<div class="src">${esc(w['출처'])}</div></div>`; }).join(''); }
-  }
-  // 공통수칙
-  if(chip==='전체'||chip==='공통수칙'){
-    const C=D.common.filter(c=>hit(q,c['구분'],c['항목'],c['내용']));
-    if(C.length&&(q||chip==='공통수칙')){ html+='<div class="sec">사업장 공통수칙 '+C.length+'</div>'+C.map(c=>`<div class="card"><div class="tag"><span class="pill gray">${esc(c['구분'])}</span>${newBadge(c['적용시작일'])}</div><h4>${esc(c['항목'])}</h4><p>${esc(c['내용'])}</p><div class="src">${esc(c['출처'])}</div></div>`).join(''); }
-  }
-  // One Strike Out
-  if(chip==='전체'||chip==='벌점'){
-    const O=D.onestrike.filter(o=>hit(q,o['구분'],o['위반내역'],o['협력사페널티']));
-    if(O.length&&(q||chip==='벌점')){ html+='<div class="sec">One Strike Out · 작업중지 · 사후조치 '+O.length+'</div>'+O.map(o=>`<div class="card"><div class="tag"><span class="pill red">${esc(o['구분'])}</span>${newBadge(o['적용시작일'])}</div><h4>${esc(o['위반내역'])}</h4>${o['협력사페널티']?`<p class="sub">🏢 ${esc(o['협력사페널티'])}</p>`:''}${o['근로자페널티']?`<p class="sub">👷 ${esc(o['근로자페널티'])}</p>`:''}${o['비고']?`<p class="sub">${esc(o['비고'])}</p>`:''}<div class="src">${esc(o['출처'])}</div></div>`).join(''); }
-    const P=D.penalty.filter(p=>hit(q,p['대분류'],p['세부항목'],p['키워드'],p['코드']));
-    if(P.length&&q){ html+='<div class="sec">벌점표 '+P.length+'</div>'+P.map(p=>penaltyCard(p)).join(''); }
-  }
-  if(!q&&chip==='전체'&&!html) html='';
-  if(!html) html=`<div class="empty">검색 결과가 없습니다.<br><span style="font-size:13px">다른 단어로 검색하거나 상단 분류를 선택해 보세요.</span></div>`;
-  box.innerHTML=html;
-}
-function penaltyCard(p){
-  const up = p['변경']==='상향'||p['변경']==='신설';
-  return `<div class="card"><div class="ptrow"><div><div class="tag"><span class="pill gray">${esc(p['코드'])} ${esc(p['대분류'])}</span>${p['작업중지']?'<span class="pill red">작업중지</span>':''}${up?`<span class="pill amber">${esc(p['변경'])}</span>`:''}</div><h4 style="margin:0">${esc(p['세부항목'])}</h4></div><div class="pt">${esc(p['감점'])}<small>점</small></div></div>
-  ${up?`<p class="sub" style="margin-top:6px">26.7.1 개정 전 ${esc(p['구감점_25년9월'])}점 → <b>${esc(p['감점'])}점</b></p>`:''}<div class="src">${esc(p['출처'])}</div></div>`;
-}
-
-
 /* ===== 규정 원문 (OPS) ===== */
 function opsCard(o, full){
   const kws=String(o['연관검색어']||'').split(',').map(x=>x.trim()).filter(Boolean);
@@ -513,13 +553,7 @@ function penaltyView(){
   <p class="foot">우수사례는 건별 가산점 3점 · 반기 적격수급업체 평가에 반영</p>`;
 }
 
-/* ===== 상세(변경이력/강조사항) ===== */
-function detailView(){
-  const ch=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1);
-  const hl=[...D.highlights].sort((a,b)=>b['월']<a['월']?-1:1);
-  return `<div class="sec">규정 변경 이력</div><div class="card" style="padding:8px 16px">${ch.map(c=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><span style="flex:none;color:var(--mute);font-size:12.5px;width:84px;padding-top:2px">${esc(c['시행일'])}</span><span>${esc(c['내용'])} ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:11.5px;color:var(--mute)">${esc(c['출처'])}</div></span></div>`).join('')}</div>
-  <div class="sec">월별 협의체 강조사항</div>${hl.map(h=>`<div class="card" style="padding:12px 14px"><div class="tag"><span class="pill gray">${esc(h['월'])}</span></div><h4 style="margin:4px 0 6px;font-size:14.5px">${esc(h['제목'])}</h4><p style="margin:0;font-size:13.5px">${esc(h['내용'])}</p><div class="src">${esc(h['출처'])}</div></div>`).join('')}`;
-}
+
 loadData(); setTimeout(flushQueue, 2000);
 </script>
 </body>
