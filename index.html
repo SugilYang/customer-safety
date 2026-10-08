@@ -165,7 +165,7 @@ ul.sub li:before{content:none}
 .gsec li ul.sub li:before,.ob li ul.sub li:before{content:none}
 
 /* ---- 스플래시 ---- */
-.splash{position:fixed;inset:0;z-index:200;background:#eef6f3 url(img/splash_bg.jpg) center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.splash{position:fixed;inset:0;z-index:200;background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),#eef6f3 url(img/splash_bg.jpg) center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
 .splash .glow{position:absolute;width:70vmin;height:70vmin;border-radius:50%;background:radial-gradient(circle,rgba(0,128,111,.14),rgba(0,128,111,0) 70%);animation:sp-glow 2.4s ease-out forwards}
 .splash .logos{display:flex;align-items:center;gap:0;position:relative;padding:30px 40px}
 .splash .logos:before{content:"";position:absolute;inset:-30px -50px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.95) 0%,rgba(255,255,255,.75) 40%,rgba(255,255,255,0) 72%);z-index:-1}
@@ -173,10 +173,11 @@ ul.sub li:before{content:none}
 .splash .lgo.lglogo{animation:sp-in-l .9s cubic-bezier(.2,.8,.2,1) .35s forwards}
 .splash .lgo.ets{animation:sp-in-r .9s cubic-bezier(.2,.8,.2,1) .85s forwards}
 .splash .x{width:0;height:2px;margin:0 16px;flex:none;background:linear-gradient(90deg,#A50034,#00806F);border-radius:2px;opacity:0;animation:sp-line .7s ease-out 1.5s forwards}
-.splash .tag{margin-top:34px;text-align:center;opacity:0;transform:translateY(10px);animation:sp-up .8s ease-out 2.0s forwards}
-.splash .tag b{display:block;font-size:19px;color:#0f2a25;text-shadow:0 1px 0 rgba(255,255,255,.8);letter-spacing:-.2px}
-.splash .tag small{display:block;margin-top:6px;font-size:13px;color:#3f5a53;text-shadow:0 1px 0 rgba(255,255,255,.8)}
-.splash .skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));font-size:12px;color:#8a948f;opacity:0;animation:sp-up .6s ease-out 1.2s forwards}
+.splash .tag{margin-top:26px;text-align:center;opacity:0;transform:translateY(10px);animation:sp-up .8s ease-out 2.0s forwards;position:relative;padding:14px 28px}
+.splash .tag:before{content:"";position:absolute;inset:-10px -30px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.95) 0%,rgba(255,255,255,.7) 45%,rgba(255,255,255,0) 75%);z-index:-1}
+.splash .tag b{display:block;font-size:22px;font-weight:900;color:#0b1f1b;letter-spacing:-.3px;letter-spacing:-.2px}
+.splash .tag small{display:block;margin-top:7px;font-size:14px;font-weight:500;color:#1f3d36}
+.splash .skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));font-size:12px;color:#6f7d77;text-align:center;line-height:1.7;opacity:0;animation:sp-up .6s ease-out 1.2s forwards}
 .splash.out{animation:sp-out .75s ease-in forwards}
 @keyframes sp-glow{0%{transform:scale(.4);opacity:0}40%{opacity:1}100%{transform:scale(1.6);opacity:.6}}
 @keyframes sp-in-l{0%{opacity:0;transform:translateX(-40px) scale(.9)}100%{opacity:1;transform:none}}
@@ -206,6 +207,7 @@ ul.sub li:before{content:none}
 .emg{display:flex;gap:8px;margin-bottom:12px}
 .emg a{flex:1;background:#fff;border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:center;gap:8px;font-size:13px}
 .emg a b{display:block;font-size:14px;color:var(--red)}
+.emg.sp a b{color:var(--g)}
 /* 답변 카드 */
 .gcard{background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:12px;overflow:hidden}
 .gcard .gh{padding:16px 16px 12px;display:flex;gap:12px;align-items:flex-start}
@@ -247,7 +249,7 @@ ul.sub li:before{content:none}
   <div class="glow"></div>
   <div class="logos"><img class="lgo lglogo" src="img/lg_logo.png" alt="LG"><div class="x"></div><img class="lgo ets" src="img/ets_logo.png" alt="ETS"></div>
   <div class="tag"><b>함께 만드는 안전한 현장</b><small>고객사 현장 안전 길잡이 · 주식회사 이티에스</small></div>
-  <div class="skip">화면을 누르면 건너뜁니다</div>
+  <div class="skip"><span id="spVer"></span><br>화면을 누르면 건너뜁니다</div>
 </div>
 <div class="app">
   <header class="top">
@@ -324,10 +326,8 @@ const TOPICS = () => (D.guides||[]).slice(0,12);
 /* ===== 스플래시: 하루 첫 실행 또는 ?splash ===== */
 function showSplash(){
   const el=$('#splash'); if(!el) return;
-  const force=/[?&]splash/.test(location.search); const today=new Date().toISOString().slice(0,10);
-  let last=''; try{ last=localStorage.getItem('splash_day')||''; }catch(e){}
-  if(!force && last===today) return;
-  try{ localStorage.setItem('splash_day',today); }catch(e){}
+  if(/[?&]nosplash/.test(location.search)) return; // 시연·점검용으로 끌 때만
+  const v=(window.FALLBACK_DATA&&window.FALLBACK_DATA.version)||{}; const ve=$('#spVer'); if(ve) ve.innerHTML=`${esc(v['버전']||'')} · 배포 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')} · 최근 반영 ${esc(v['최근반영']||'')}`;
   el.classList.remove('hid'); document.body.style.overflow='hidden';
   T.splashTimer=setTimeout(()=>endSplash(false), 3400);
 }
@@ -350,8 +350,12 @@ function homeView(){
   <div class="acc" id="accOS"><button onclick="this.parentNode.classList.toggle('open')">⛔ 이것만은 절대 — 1회 적발 시 퇴출 7가지<span class="ar">›</span></button>
     <div class="bd"><ol class="list" style="font-size:14px">${os.map(r=>`<li>${esc(r['위반내역'])}</li>`).join('')}</ol>
     <p style="margin:8px 0 0;font-size:13px;color:var(--mute)">근로자 영구 퇴출 · 회사 거래제한 (26.10.1 시행, LG에너지솔루션 One Strike Out)</p></div></div>
+  <div class="sec" style="margin-top:4px">🚨 비상신고 — 화재·사고·누출 발생 시 즉시 (누르면 전화)</div>
   <div class="emg"><a href="tel:0432197119">☎<span>방재센터 EP1<b>043-219-7119</b></span></a><a href="tel:0437180119">☎<span>방재센터 EP2<b>043-718-0119</b></span></a></div>
-  <p class="foot">주식회사 이티에스 · LG에너지솔루션 협의체 자료 기준 (25.6~26.9)</p>`;
+  <div class="sec">📞 작업·허가서·안전 문의 — Safety Police (누르면 전화)</div>
+  <div class="emg sp"><a href="tel:01054873122">☎<span>EP1 이상억 팀장<b>010-5487-3122</b></span></a><a href="tel:01098006229">☎<span>EP2 변귀림 팀장<b>010-9800-6229</b></span></a></div>
+  <p style="font-size:12px;color:var(--mute);margin:-4px 2px 12px">비상 외 안전 문의는 환경안전팀이 아닌 Safety Police로 연락하세요. 총괄·주정차·페널티 문의는 더보기에 있습니다.</p>
+  <p class="foot">주식회사 이티에스 · ${esc((D.version||{})['버전']||'')} (${esc(((D.version||{})['배포일']||'').replace(/-/g,'.'))})<br>${esc((D.version||{})['자료기준']||'')} · 최근 반영 ${esc((D.version||{})['최근반영']||'')}</p>`;
 }
 
 /* ===== 검색 ===== */
@@ -422,6 +426,11 @@ function moreView(){
   const adminBtn=`<button onclick="location.href='admin.html'"><span>🔐</span><div><div style="font-weight:700">관리자 · 교육 이수 현황</div><small>생산관리 전용 · 비밀번호 필요</small></div><i>›</i></button>`;
   const changes=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1).slice(0,2);
   return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}${adminBtn}</div>
+  <div class="sec">연락처 (누르면 전화)</div>
+  <div class="card" style="padding:6px 14px">
+    ${[['🚨 비상 — 화재·사고·누출 즉시 신고','방재센터 EP1','043-219-7119'],['','방재센터 EP2','043-718-0119'],['📞 작업·안전 문의, 교육 협의','Safety Police EP1 이상억 팀장','010-5487-3122'],['','Safety Police EP2 변귀림 팀장','010-9800-6229'],['안전 지도·법규·KOSHA 문의','Safety Police 총괄 곽충호 소장','010-3871-7939'],['주·정차 관련','LG 사무','043-718-0123'],['페널티 점수 문의','LG 사무','043-219-9711']].map(([h,n,t])=>`${h?`<div style="font-size:12px;color:var(--mute);margin:10px 0 2px;font-weight:700">${h}</div>`:''}<a href="tel:${t.replace(/-/g,'')}" style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px"><span>${n}</span><b style="color:var(--g)">☎ ${t}</b></a>`).join('')}
+    <div class="src">26년 5·7·8월 협의체 "공사 안전 관련 문의 사항 안내" · 이메일 ssmteam@lgensol.com / kch1004@lgensol.com</div>
+  </div>
   <div class="sec">작업시간 · 사전신고</div>
   <div class="card"><div class="kv">
     <b>작업 시작</b><span>09:00 (LG 담당자 협의 시 06:00~09:00)</span>
@@ -431,7 +440,7 @@ function moreView(){
   </div></div>
   <div class="sec">최근 규정 변경</div>
   ${changes.map(c=>`<div class="card" style="padding:12px 14px"><span style="font-size:12px;color:var(--mute)">${esc(c['시행일'])}</span> ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:14px;margin-top:2px">${esc(c['내용'])}</div></div>`).join('')}
-  <p class="foot">LG에너지솔루션 공사업체 안전보건 협의회 자료 (25.6~26.9) · 주식회사 이티에스</p>`;
+  <p class="foot">${esc((D.version||{})['버전']||'')} · 배포 ${esc(((D.version||{})['배포일']||'').replace(/-/g,'.'))}<br>${esc((D.version||{})['자료기준']||'')} · 최근 반영 ${esc((D.version||{})['최근반영']||'')}<br>주식회사 이티에스</p>`;
 }
 function statusView(){
   return `<div class="card"><h3><span class="ic">✓</span>내 교육 이수 상태</h3>
