@@ -6,11 +6,13 @@
 <title>교육 이수 현황 — ETS</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
-:root{--g:#1B5E3C;--g3:#E6F2EC;--ink:#1a1f1c;--mute:#5f6b65;--line:#e3e8e5;--bg:#f4f6f5;--red:#B3261E;--amber:#B26A00;--amber-bg:#FFF4E0;--red-bg:#FCE9E7}
+:root{--g:#00806F;--g3:#E3F3F0;--ink:#1a1f1c;--mute:#5f6b65;--line:#e3e8e5;--bg:#f4f6f5;--red:#B3261E;--amber:#B26A00;--amber-bg:#FFF4E0;--red-bg:#FCE9E7}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-size:14px;word-break:keep-all}
 button{font:inherit;cursor:pointer;border:0}
 .top{background:var(--g);color:#fff;padding:12px 18px;display:flex;align-items:center;gap:10px}
+.lg{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:5px 9px;height:34px}
+.lg img{height:22px;display:block}
 .wm{font-weight:900;font-size:20px;background:#fff;color:var(--g);padding:0 8px;border-radius:6px;line-height:26px}
 .top img{height:26px}
 .top .t{font-weight:700}.top .t small{display:block;font-weight:400;font-size:11px;opacity:.85}
@@ -41,7 +43,7 @@ tr.exp td{color:#9a9a9a}
 </style>
 </head>
 <body>
-<div class="top"><img src="img/ets_logo.png" alt="ETS" onerror="this.outerHTML='<span class=wm>ETS</span>'"><div class="t">LGES 안전교육 이수 현황<small>생산관리 · 현장 투입 전 확인용</small></div></div>
+<div class="top"><span class="lg"><img src="img/ets_logo.png" alt="ETS" onerror="this.parentNode.outerHTML='<span class=wm>ETS</span>'"></span><div class="t">LGES 안전교육 이수 현황<small>생산관리 · 현장 투입 전 확인용</small></div></div>
 <div class="wrap" id="app"></div>
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // index.html 과 동일한 GAS 웹앱 URL
