@@ -23,9 +23,13 @@ a{color:var(--g)}
 .lg img{height:22px;display:block}
 .wm{font-weight:900;letter-spacing:.5px;font-size:20px;background:#fff;color:var(--g);padding:0 8px;border-radius:6px;line-height:26px}
 .top .t{font-weight:700;font-size:17px;line-height:1.25;white-space:nowrap;min-width:0;letter-spacing:-.2px}
-@media(max-width:360px){.top{gap:12px}.top .t{font-size:15px}.top .t small{font-size:11px}}
+@media(max-width:400px){.top{gap:12px;padding:12px 12px}.top .t{font-size:15px}.top .t small{font-size:11px}.logo img{height:24px}.top .back{padding:6px 8px;font-size:12.5px}.top .home{width:30px;height:30px;font-size:16px}}
+@media(max-width:360px){.top .back .bt{display:none}.top .back{width:30px;height:30px;padding:0;font-size:20px;display:flex;align-items:center;justify-content:center}}
+@media(max-width:340px){.top .t{font-size:14px}.top .t small{font-size:10px}}
 .top .t small{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:2px}
-.top .back{margin-left:auto;background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px}
+.top .hbtns{margin-left:auto;display:flex;gap:6px;align-items:center;flex-shrink:0}
+.top .back{background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px}
+.top .home{background:rgba(255,255,255,.15);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;text-decoration:none;line-height:1}
 main{flex:1;padding:16px 16px 90px}
 /* tabs */
 .nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
@@ -264,7 +268,7 @@ ul.sub li:before{content:none}
   <header class="top">
     <div class="logo"><img src="img/ets_logo_white.png" alt="ETS" onerror="this.outerHTML='<span class=wm>ETS</span>'"></div>
     <div class="t">고객사 현장 안전 길잡이<small>출입 전 교육 · 작업수칙 검색</small></div>
-    <button class="back hid" id="backBtn" onclick="goBack()">‹ 뒤로</button>
+    <div class="hbtns"><button class="back hid" id="backBtn" onclick="goBack()">‹ <span class="bt">뒤로</span></button><a class="home" href="https://sugilyang.github.io/ets-safety/" title="ETS 안전포털">🏠</a></div>
   </header>
   <main id="main"></main>
   <nav class="nav"><div class="w">
@@ -436,9 +440,10 @@ function penaltyCard(p){
 /* ===== 더보기 ===== */
 function moreView(){
   const items=[['📄','LG 규정 원문 (OPS)','협의체에 공유된 운영표준 '+(D.ops||[]).length+'건, 원문 페이지 보기','ops'],['⚠️','벌점표','위반 항목별 감점·작업중지 ('+D.penalty.length+'항목)','penalty'],['↻','규정 변경 이력 · 월별 강조사항','언제 무엇이 바뀌었는지','detail'],['✓','내 교육 이수 확인','이름 또는 연락처 뒤 4자리로 조회','status']];
+  const portalBtn=`<button onclick="location.href='https://sugilyang.github.io/ets-safety/'"><span>🏠</span><div><div style="font-weight:700">ETS 안전포털</div><small>안전신문고 · TBM · 위험성평가 등</small></div><i>›</i></button>`;
   const adminBtn=`<button onclick="location.href='admin.html'"><span>🔐</span><div><div style="font-weight:700">관리자 · 교육 이수 현황</div><small>생산관리 전용 · 비밀번호 필요</small></div><i>›</i></button>`;
   const changes=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1).slice(0,2);
-  return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}${adminBtn}</div>
+  return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}${adminBtn}${portalBtn}</div>
   <div class="sec">연락처 (누르면 전화)</div>
   <div class="card" style="padding:6px 14px">
     ${[['🚨 비상 — 화재·사고·누출 즉시 신고','방재센터 EP1','','043-219-7119'],['','방재센터 EP2','','043-718-0119'],['📞 작업·안전 문의, 교육 협의','Safety Police EP1','이상억 팀장','010-5487-3122'],['','Safety Police EP2','변귀림 팀장','010-9800-6229'],['안전 지도·법규·KOSHA 문의','Safety Police 총괄','곽충호 소장','010-3871-7939'],['주·정차 관련','LG 사무실','','043-718-0123']].map(([h,n,s,t])=>`${h?`<div style="font-size:12px;color:var(--mute);margin:10px 0 2px;font-weight:700">${h}</div>`:''}<a href="tel:${t.replace(/-/g,'')}" class="ctr"><span>${n}${s?`<small>${s}</small>`:''}</span><b>☎ ${t}</b></a>`).join('')}
