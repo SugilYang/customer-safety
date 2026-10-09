@@ -291,7 +291,7 @@ ul.sub li:before{content:none}
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // GAS 웹앱 URL (교육이수 기록·설정값 전용)
 const IMG = 'img/';
 /* 내용(가이드·규정·슬라이드·벌점표)은 data.js 에 있습니다. 매달 업데이트 = data.js 교체 */
-let D = null, view = 'home', T = {}, HIST = [];
+let D = null, view = 'home', T = {};
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function verLine(dev){ const v=D.version||{}; return `주식회사 이티에스 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}${dev?`<br><span class="dev">개발 · ${esc(v['개발']||'')}</span>`:''}`; }
@@ -331,8 +331,13 @@ async function loadData(){
     if(j && j.settings && Object.keys(j.settings).length){ D.settings = Object.assign({}, D.settings, j.settings); if(view!=='train') render(); }
   }catch(e){ console.warn('settings fetch fail', e); }
 }
-function go(v, arg){ if(v!==view||arg) HIST.push({view,arg:T.arg,q:T.q,chip:T.chip,pcat:T.pcat}); view=v; T.arg=arg; render(); window.scrollTo(0,0); }
-function goBack(){ const h=HIST.pop(); if(!h){ go('home'); return; } view=h.view; T.arg=h.arg; T.q=h.q; T.chip=h.chip; T.pcat=h.pcat; render(); window.scrollTo(0,0); }
+// 화면 이동을 브라우저 기록에 연결: 폰 뒤로가기 = 앱 뒤로가기 (홈에서 한 번 더 누르면 앱을 나감)
+const snap = () => ({view, arg:T.arg, q:T.q, chip:T.chip, pcat:T.pcat});
+function apply(h){ view=h.view; T.arg=h.arg; T.q=h.q; T.chip=h.chip; T.pcat=h.pcat; render(); window.scrollTo(0,0); }
+function go(v, arg){ const same = (v===view && !arg); if(!same){ try{ history.replaceState(snap(), ''); }catch(e){} } view=v; T.arg=arg; if(!same){ try{ history.pushState(snap(), ''); }catch(e){} } render(); window.scrollTo(0,0); }
+function goBack(){ if(history.state && history.state.view){ history.back(); } else { apply({view:'home'}); try{ history.replaceState(snap(), ''); }catch(e){} } }
+window.addEventListener('popstate', e => { apply((e.state && e.state.view) ? e.state : {view:'home'}); });
+try{ history.replaceState({view:'home'}, ''); }catch(e){}
 function render(){
   const navMap={home:'home',search:'search',guide:'search',train:'train',result:'train',more:'more',ops:'more',penalty:'more',detail:'more',status:'more'};
   document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===navMap[view]));
