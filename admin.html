@@ -61,24 +61,34 @@ async function load(){
     sessionStorage.setItem('lges_pw',PW); ROWS=j.rows; render();
   }catch(e){ loginView('연결 실패: '+e.message); }
 }
-function render(){
-  // 같은 사람(이름+연락처 뒤4) 최신 1건만 '현재 상태'로, 이력은 토글
+function latestRows(){
   const key=r=>r['이름']+'|'+String(r['연락처']).replace(/\D/g,'').slice(-4);
   const latest={}; ROWS.forEach(r=>{ const k=key(r); if(!latest[k]||new Date(r['이수일시'])>new Date(latest[k]['이수일시'])) latest[k]=r; });
-  let L=Object.values(latest);
-  const cnt={유효:L.filter(r=>r.status==='유효').length, 만료임박:L.filter(r=>r.status==='만료임박').length, 만료:L.filter(r=>r.status==='만료').length};
+  return Object.values(latest);
+}
+function filtered(){
+  let L=latestRows();
   if(F.st!=='전체') L=L.filter(r=>r.status===F.st);
   const q=F.q.trim().toLowerCase(); if(q) L=L.filter(r=>[r['이름'],r['업체명'],r['연락처'],r['이메일']].join(' ').toLowerCase().includes(q));
-  L.sort((a,b)=>new Date(b['이수일시'])-new Date(a['이수일시']));
+  return L.sort((a,b)=>new Date(b['이수일시'])-new Date(a['이수일시']));
+}
+function rowsHtml(){
+  const L=filtered();
+  return L.length?L.map(r=>`<tr class="${r.status==='만료'?'exp':''}"><td><span class="pill ${r.status==='만료'?'red':r.status==='만료임박'?'amber':''}">${r.status}</span></td><td><b>${esc(r['이름'])}</b></td><td>${esc(r['업체명'])}</td><td>${esc(r['연락처'])}</td><td class="hide-m mute">${esc(r['이메일'])}</td><td>${esc(fmt(r['이수일시']))}</td><td>${esc(String(r['만료일']).slice(0,10))}</td><td style="text-align:right;font-weight:700;color:${r.daysLeft<0?'var(--red)':r.daysLeft<=30?'var(--amber)':'var(--ink)'}">${r.daysLeft<0?'만료 '+(-r.daysLeft)+'일 경과':r.daysLeft+'일'}</td></tr>`).join(''):'<tr><td colspan="8" class="mute" style="text-align:center;padding:30px">해당 인원이 없습니다</td></tr>';
+}
+// 검색어 입력 중에는 표만 갱신 (화면 전체를 다시 그리면 한글 조합이 끊김)
+function renderRows(){ const tb=document.getElementById('rows'); if(tb) tb.innerHTML=rowsHtml(); }
+function setSt(s){ F.st=s; document.querySelectorAll('.chips button').forEach(b=>b.classList.toggle('on', b.dataset.st===s)); renderRows(); }
+function render(){
+  const L=latestRows();
+  const cnt={유효:L.filter(r=>r.status==='유효').length, 만료임박:L.filter(r=>r.status==='만료임박').length, 만료:L.filter(r=>r.status==='만료').length};
   $('#app').innerHTML=`
-  <div class="stats"><div class="stat"><b>${Object.keys(latest).length}</b><span>교육 이수자(명)</span></div><div class="stat g"><b>${cnt.유효}</b><span>유효</span></div><div class="stat amber"><b>${cnt.만료임박}</b><span>30일 내 만료</span></div><div class="stat red"><b>${cnt.만료}</b><span>만료 — 재교육 필요</span></div></div>
+  <div class="stats"><div class="stat"><b>${L.length}</b><span>교육 이수자(명)</span></div><div class="stat g"><b>${cnt.유효}</b><span>유효</span></div><div class="stat amber"><b>${cnt.만료임박}</b><span>30일 내 만료</span></div><div class="stat red"><b>${cnt.만료}</b><span>만료 — 재교육 필요</span></div></div>
   <div class="card">
-    <div class="bar"><input id="q" placeholder="이름·업체·연락처 검색" value="${esc(F.q)}" oninput="F.q=this.value;render();document.getElementById('q').focus();document.getElementById('q').setSelectionRange(99,99)">
-      <span class="chips">${['전체','유효','만료임박','만료'].map(s=>`<button class="${F.st===s?'on':''}" onclick="F.st='${s}';render()">${s}</button>`).join('')}</span>
+    <div class="bar"><input id="q" placeholder="이름·업체·연락처 검색" value="${esc(F.q)}" oninput="F.q=this.value;renderRows()">
+      <span class="chips">${['전체','유효','만료임박','만료'].map(s=>`<button data-st="${s}" class="${F.st===s?'on':''}" onclick="setSt('${s}')">${s}</button>`).join('')}</span>
       <button class="btn ghost" onclick="load()">새로고침</button><button class="btn ghost" onclick="csv()">CSV</button></div>
-    <div style="overflow-x:auto"><table><thead><tr><th>상태</th><th>이름</th><th>업체명</th><th>연락처</th><th class="hide-m">이메일</th><th>이수일</th><th>만료일</th><th>남은일</th></tr></thead><tbody>
-    ${L.length?L.map(r=>`<tr class="${r.status==='만료'?'exp':''}"><td><span class="pill ${r.status==='만료'?'red':r.status==='만료임박'?'amber':''}">${r.status}</span></td><td><b>${esc(r['이름'])}</b></td><td>${esc(r['업체명'])}</td><td>${esc(r['연락처'])}</td><td class="hide-m mute">${esc(r['이메일'])}</td><td>${esc(fmt(r['이수일시']))}</td><td>${esc(String(r['만료일']).slice(0,10))}</td><td style="text-align:right;font-weight:700;color:${r.daysLeft<0?'var(--red)':r.daysLeft<=30?'var(--amber)':'var(--ink)'}">${r.daysLeft<0?'만료 '+(-r.daysLeft)+'일 경과':r.daysLeft+'일'}</td></tr>`).join(''):'<tr><td colspan="8" class="mute" style="text-align:center;padding:30px">해당 인원이 없습니다</td></tr>'}
-    </tbody></table></div>
+    <div style="overflow-x:auto"><table><thead><tr><th>상태</th><th>이름</th><th>업체명</th><th>연락처</th><th class="hide-m">이메일</th><th>이수일</th><th>만료일</th><th>남은일</th></tr></thead><tbody id="rows">${rowsHtml()}</tbody></table></div>
     <p class="mute" style="margin:10px 0 0">동일 인원(이름+연락처 뒤 4자리)은 가장 최근 이수 기록 기준으로 표시됩니다. 전체 이력 ${ROWS.length}건 · 유효기간 ${esc(String((ROWS[0]&&ROWS.validMonths)||6))}개월 · 만료 30·7·1일 전 본인 이메일로 자동 안내</p>
   </div>`;
 }
