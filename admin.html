@@ -51,6 +51,7 @@ let ROWS=[], PW='', F={q:'',st:'전체'};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=d=>String(d||'').slice(0,16);
+const fphone=v=>{ let d=String(v||'').replace(/\D/g,''); if(d.startsWith('82')) d='0'+d.slice(2); return d.length===11?d.replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3'):(d.length===10?d.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3'):String(v||'')); };
 function loginView(msg){ $('#app').innerHTML=`<div class="card login"><h3 style="margin:0 0 10px">관리자 확인</h3><p class="mute" style="margin:0 0 12px">비밀번호를 입력하세요.</p><input id="pw" type="password" placeholder="비밀번호" onkeydown="if(event.key==='Enter')login()"><button class="btn" style="width:100%;margin-top:10px" onclick="login()">확인</button>${msg?`<div class="err">${esc(msg)}</div>`:''}</div>`; $('#pw').focus(); }
 async function login(){ PW=$('#pw').value; await load(); }
 async function load(){
@@ -74,7 +75,7 @@ function filtered(){
 }
 function rowsHtml(){
   const L=filtered();
-  return L.length?L.map(r=>`<tr class="${r.status==='만료'?'exp':''}"><td><span class="pill ${r.status==='만료'?'red':r.status==='만료임박'?'amber':''}">${r.status}</span></td><td><b>${esc(r['이름'])}</b></td><td>${esc(r['업체명'])}</td><td>${esc(r['연락처'])}</td><td class="hide-m mute">${esc(r['이메일'])}</td><td>${esc(fmt(r['이수일시']))}</td><td>${esc(String(r['만료일']).slice(0,10))}</td><td style="text-align:right;font-weight:700;color:${r.daysLeft<0?'var(--red)':r.daysLeft<=30?'var(--amber)':'var(--ink)'}">${r.daysLeft<0?'만료 '+(-r.daysLeft)+'일 경과':r.daysLeft+'일'}</td></tr>`).join(''):'<tr><td colspan="8" class="mute" style="text-align:center;padding:30px">해당 인원이 없습니다</td></tr>';
+  return L.length?L.map(r=>`<tr class="${r.status==='만료'?'exp':''}"><td><span class="pill ${r.status==='만료'?'red':r.status==='만료임박'?'amber':''}">${r.status}</span></td><td><b>${esc(r['이름'])}</b></td><td>${esc(r['업체명'])}</td><td>${esc(fphone(r['연락처']))}</td><td class="hide-m mute">${esc(r['이메일'])}</td><td>${esc(fmt(r['이수일시']))}</td><td>${esc(String(r['만료일']).slice(0,10))}</td><td style="text-align:right;font-weight:700;color:${r.daysLeft<0?'var(--red)':r.daysLeft<=30?'var(--amber)':'var(--ink)'}">${r.daysLeft<0?'만료 '+(-r.daysLeft)+'일 경과':r.daysLeft+'일'}</td></tr>`).join(''):'<tr><td colspan="8" class="mute" style="text-align:center;padding:30px">해당 인원이 없습니다</td></tr>';
 }
 // 검색어 입력 중에는 표만 갱신 (화면 전체를 다시 그리면 한글 조합이 끊김)
 function renderRows(){ const tb=document.getElementById('rows'); if(tb) tb.innerHTML=rowsHtml(); }
@@ -93,7 +94,7 @@ function render(){
   </div>`;
 }
 function lock(){ PW=''; ROWS=[]; loginView(); }
-function csv(){ const h=['상태','이름','업체명','연락처','이메일','이수일시','만료일']; const rows=ROWS.map(r=>h.map(k=>k==='상태'?r.status:r[k])); const t='﻿'+[h,...rows].map(r=>r.map(x=>'"'+String(x==null?'':x).replace(/"/g,'""')+'"').join(',')).join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'})); a.download='LGES_안전교육_이수현황.csv'; a.click(); }
+function csv(){ const h=['상태','이름','업체명','연락처','이메일','이수일시','만료일']; const rows=ROWS.map(r=>h.map(k=>k==='상태'?r.status:(k==='연락처'?fphone(r[k]):r[k]))); const t='﻿'+[h,...rows].map(r=>r.map(x=>'"'+String(x==null?'':x).replace(/"/g,'""')+'"').join(',')).join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'})); a.download='LGES_안전교육_이수현황.csv'; a.click(); }
 loginView();
 </script>
 </body>

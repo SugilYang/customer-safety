@@ -594,9 +594,12 @@ async function flushQueue(){
   setQueue(rest); if(ok) toast(`대기 중이던 교육 기록 ${ok}건을 전송했습니다`);
 }
 window.addEventListener('online', flushQueue); setInterval(flushQueue, 60000);
+// 연락처 정리: +82 10 … / 821012345678 / 01012345678 → 010-1234-5678
+function normPhone(v){ let d=String(v||'').replace(/\D/g,''); if(d.startsWith('82')) d='0'+d.slice(2); if(!/^01[016789]\d{7,8}$/.test(d)) return ''; return d.length===11 ? d.replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3') : d.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3'); }
 async function submitTrain(){
-  const name=$('#fName').value.trim(), company=$('#fComp').value.trim(), phone=$('#fPhone').value.trim(), email=$('#fMail').value.trim();
-  if(!name||!company||!phone||!email) return toast('모든 항목을 입력해 주세요');
+  const name=$('#fName').value.trim(), company=$('#fComp').value.trim(), phone=normPhone($('#fPhone').value), email=$('#fMail').value.trim();
+  if(!name||!company||!$('#fPhone').value.trim()||!email) return toast('모든 항목을 입력해 주세요');
+  if(!phone){ toast('연락처를 확인해 주세요 (예: 010-1234-5678)'); $('#fPhone').focus(); return; }
   if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return toast('이메일 형식을 확인해 주세요');
   if(!$('#fAgree').checked) return toast('확인 체크가 필요합니다');
   if(!hasGas()){ toast('서버 미연결(테스트 모드) — 기록되지 않았습니다'); T.sent={name,company,email,expire:'(배포 후 표시)'}; render(); return; }
