@@ -47,7 +47,7 @@ tr.exp td{color:#9a9a9a}
 <div class="wrap" id="app"></div>
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // index.html 과 동일한 GAS 웹앱 URL
-let ROWS=[], PW=sessionStorage.getItem('lges_pw')||'', F={q:'',st:'전체'};
+let ROWS=[], PW='', F={q:'',st:'전체'};
 const $=s=>document.querySelector(s);
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const fmt=d=>String(d||'').slice(0,16);
@@ -57,8 +57,8 @@ async function load(){
   if(!GAS_URL.startsWith('http')) return loginView('GAS URL이 설정되지 않았습니다.');
   $('#app').innerHTML='<p class="mute">불러오는 중…</p>';
   try{ const r=await fetch(GAS_URL+'?action=list&pw='+encodeURIComponent(PW),{cache:'no-store'}); const j=await r.json();
-    if(!j.ok){ sessionStorage.removeItem('lges_pw'); return loginView(j.error||'오류'); }
-    sessionStorage.setItem('lges_pw',PW); ROWS=j.rows; render();
+    if(!j.ok){ PW=''; return loginView(j.error||'오류'); }
+    ROWS=j.rows; render();
   }catch(e){ loginView('연결 실패: '+e.message); }
 }
 function latestRows(){
@@ -87,13 +87,14 @@ function render(){
   <div class="card">
     <div class="bar"><input id="q" placeholder="이름·업체·연락처 검색" value="${esc(F.q)}" oninput="F.q=this.value;renderRows()">
       <span class="chips">${['전체','유효','만료임박','만료'].map(s=>`<button data-st="${s}" class="${F.st===s?'on':''}" onclick="setSt('${s}')">${s}</button>`).join('')}</span>
-      <button class="btn ghost" onclick="load()">새로고침</button><button class="btn ghost" onclick="csv()">CSV</button></div>
+      <button class="btn ghost" onclick="load()">새로고침</button><button class="btn ghost" onclick="csv()">CSV</button><button class="btn ghost" onclick="lock()">잠금</button></div>
     <div style="overflow-x:auto"><table><thead><tr><th>상태</th><th>이름</th><th>업체명</th><th>연락처</th><th class="hide-m">이메일</th><th>이수일</th><th>만료일</th><th>남은일</th></tr></thead><tbody id="rows">${rowsHtml()}</tbody></table></div>
     <p class="mute" style="margin:10px 0 0">동일 인원(이름+연락처 뒤 4자리)은 가장 최근 이수 기록 기준으로 표시됩니다. 전체 이력 ${ROWS.length}건 · 유효기간 ${esc(String((ROWS[0]&&ROWS.validMonths)||6))}개월 · 만료 30·7·1일 전 본인 이메일로 자동 안내</p>
   </div>`;
 }
+function lock(){ PW=''; ROWS=[]; loginView(); }
 function csv(){ const h=['상태','이름','업체명','연락처','이메일','이수일시','만료일']; const rows=ROWS.map(r=>h.map(k=>k==='상태'?r.status:r[k])); const t='﻿'+[h,...rows].map(r=>r.map(x=>'"'+String(x==null?'':x).replace(/"/g,'""')+'"').join(',')).join('\n'); const a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'})); a.download='LGES_안전교육_이수현황.csv'; a.click(); }
-PW?load():loginView();
+loginView();
 </script>
 </body>
 </html>
