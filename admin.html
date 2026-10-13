@@ -15,7 +15,9 @@ button{font:inherit;cursor:pointer;border:0}
 .lg img{height:22px;display:block}
 .wm{font-weight:900;font-size:20px;background:#fff;color:var(--g);padding:0 8px;border-radius:6px;line-height:26px}
 .top img{height:24px}
-.top .t{font-weight:700}.top .t small{display:block;font-weight:400;font-size:11px;opacity:.85}
+.top .t{font-weight:700;min-width:0}.top .t small{display:block;font-weight:400;font-size:11px;opacity:.85}
+.top .back{margin-left:auto;flex-shrink:0;background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:7px 12px;font-size:13px;text-decoration:none;white-space:nowrap}
+@media(max-width:480px){.top .t{font-size:13px}.top .t small{display:none}}
 .wrap{max-width:980px;margin:0 auto;padding:18px}
 .card{background:#fff;border-radius:14px;padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:12px}
 .login{max-width:380px;margin:60px auto}
@@ -43,7 +45,7 @@ tr.exp td{color:#9a9a9a}
 </style>
 </head>
 <body>
-<div class="top"><img src="img/ets_logo_white.png" alt="ETS" onerror="this.outerHTML='<span class=wm>ETS</span>'"><div class="t">고객사 현장 안전 길잡이 — 교육 이수 현황<small>생산관리 · 현장 출입 전 확인용</small></div></div>
+<div class="top"><img src="img/ets_logo_white.png" alt="ETS" onerror="this.outerHTML='<span class=wm>ETS</span>'"><div class="t"><span style="white-space:nowrap">고객사 현장 안전 길잡이</span> — <span style="white-space:nowrap">교육 이수 현황</span><small>생산관리 · 현장 출입 전 확인용</small></div><a class="back" href="index.html">‹ 앱으로</a></div>
 <div class="wrap" id="app"></div>
 <script>
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxLZvGIZvX2daaUTSKVGgOfpLOZV1JOiJeJFmazq_Diaxx2OW8VIACi_w9No29K3f_bKg/exec'; // index.html 과 동일한 GAS 웹앱 URL
