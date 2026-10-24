@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>현장 안전 길잡이 — LG에너지솔루션 협력사</title>
+<meta name="theme-color" content="#00806F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--g:#00806F;--g2:#009381;--g3:#E3F3F0;--ink:#1a1f1c;--mute:#5f6b65;--line:#e3e8e5;--bg:#f4f6f5;--card:#fff;--red:#B3261E;--amber:#B26A00;--amber-bg:#FFF4E0;--red-bg:#FCE9E7;--r:14px}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Noto Sans KR',system-ui,sans-serif;font-size:15px;line-height:1.55;word-break:keep-all}
+button{font:inherit;cursor:pointer;border:0}
+input,select{font:inherit}
+a{color:var(--g)}
+.app{max-width:560px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column}
+/* header */
+.top{position:sticky;top:0;z-index:10;background:var(--g);color:#fff;padding:12px 16px;display:flex;align-items:center;gap:16px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.logo{display:flex;align-items:center;gap:8px}
+.logo img{height:28px;display:block}
+.lg{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:5px 9px;height:34px}
+.lg img{height:22px;display:block}
+.wm{font-weight:900;letter-spacing:.5px;font-size:20px;background:#fff;color:var(--g);padding:0 8px;border-radius:6px;line-height:26px}
+.top .t{font-weight:700;font-size:17px;line-height:1.25;white-space:nowrap;min-width:0;letter-spacing:-.2px}
+@media(max-width:400px){.top{gap:12px;padding:12px 12px}.top .t{font-size:15px}.top .t small{font-size:11px}.logo img{height:24px}.top .back{padding:6px 8px;font-size:12.5px}.top .home{width:30px;height:30px;font-size:16px}}
+@media(max-width:360px){.top .back .bt{display:none}.top .back{width:30px;height:30px;padding:0;font-size:20px;display:flex;align-items:center;justify-content:center}}
+@media(max-width:340px){.top .t{font-size:14px}.top .t small{font-size:10px}}
+.top .t small{display:block;font-weight:400;font-size:12px;opacity:.85;margin-top:2px}
+.top .hbtns{margin-left:auto;display:flex;gap:6px;align-items:center;flex-shrink:0}
+.top .back{background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 10px;font-size:13px}
+.top .home{background:rgba(255,255,255,.15);border-radius:8px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:17px;text-decoration:none;line-height:1}
+main{flex:1;padding:16px 16px 90px}
+/* tabs */
+.nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;z-index:10;padding-bottom:env(safe-area-inset-bottom)}
+.nav .w{max-width:560px;margin:0 auto;display:flex;width:100%}
+.nav button{flex:1;background:none;padding:10px 0 8px;color:var(--mute);font-size:11px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.nav button svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.nav button.on{color:var(--g);font-weight:700}
+/* cards */
+.card{background:var(--card);border-radius:var(--r);padding:16px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:12px}
+.card h3{margin:0 0 10px;font-size:15px;display:flex;align-items:center;gap:8px}
+.card h3 .ic{width:26px;height:26px;border-radius:8px;background:var(--g3);color:var(--g);display:inline-flex;align-items:center;justify-content:center;font-size:14px}
+.hero{background:linear-gradient(135deg,#00806F,#0A5A4E);color:#fff;border-radius:18px;padding:20px 18px;margin-bottom:14px;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;right:-40px;top:-40px;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.07)}
+.hero h2{margin:0 0 4px;font-size:20px;line-height:1.3}
+.hero p{margin:0 0 14px;opacity:.9;font-size:13.5px}
+.hero .btn{width:100%;background:#fff;color:var(--g);font-weight:700;padding:14px;border-radius:12px;font-size:16px}
+.hero .meta{display:flex;gap:14px;margin-top:10px;font-size:12px;opacity:.9}
+.btn{background:var(--g);color:#fff;border-radius:12px;padding:13px 16px;font-weight:700;font-size:15px;width:100%}
+.btn:disabled{background:#c3cdc8;color:#fff}
+.btn.ghost{background:var(--g3);color:var(--g)}
+.btn.sm{width:auto;padding:8px 14px;font-size:13px;border-radius:9px}
+.row{display:flex;gap:10px}
+ol.list,ul.list{margin:0;padding-left:20px}
+ol.list li,ul.list li{margin:5px 0}
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--g3);color:var(--g);vertical-align:middle}
+.pill.red{background:var(--red-bg);color:var(--red)}.pill.amber{background:var(--amber-bg);color:var(--amber)}.pill.gray{background:#eef1ef;color:var(--mute)}
+.src{font-size:11.5px;color:var(--mute);margin-top:8px;display:flex;align-items:flex-start;gap:5px}
+.src:before{content:"출처";flex:none;font-weight:700;color:var(--g);background:var(--g3);padding:0 6px;border-radius:4px;font-size:10.5px;line-height:18px}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;font-size:14px}
+.kv b{color:var(--mute);font-weight:500;white-space:nowrap}.kv span{line-height:1.45}.kv span small{font-size:12.5px;color:var(--mute)}
+.alert{background:var(--red-bg);border-left:4px solid var(--red);padding:10px 12px;border-radius:8px;font-size:13.5px;margin-bottom:12px}
+/* quick grid */
+.quick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.quick button{background:#fff;border-radius:12px;padding:12px 6px;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:12.5px;font-weight:500;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:6px}
+.quick button span{font-size:22px}
+/* search */
+.sbox{position:relative;margin-bottom:12px}
+.sbox input{width:100%;padding:14px 44px 14px 16px;border-radius:14px;border:1.5px solid var(--line);background:#fff;font-size:15px;outline:none}
+.sbox input:focus{border-color:var(--g)}
+.sbox svg{position:absolute;right:14px;top:50%;transform:translateY(-50%);width:22px;height:22px;stroke:var(--mute);fill:none;stroke-width:2}
+.chips{display:flex;flex-wrap:wrap;gap:6px;padding-bottom:6px;margin-bottom:6px}
+.chips button{background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;color:var(--ink)}
+.chips button.on{background:var(--g);color:#fff;border-color:var(--g)}
+.res .card{padding:14px}
+.res h4{margin:0 0 6px;font-size:14.5px;line-height:1.4}
+.res .tag{font-size:11px;color:var(--mute);margin-bottom:4px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.res p{margin:4px 0;font-size:14px}
+.res .sub{font-size:13px;color:var(--mute)}
+.res img{width:100%;border-radius:10px;margin:8px 0 2px;display:block}
+.pt{font-size:18px;font-weight:900;color:var(--red);line-height:1}
+.pt small{font-size:11px;font-weight:500;color:var(--mute)}
+.ptrow{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.empty{text-align:center;color:var(--mute);padding:30px 10px;font-size:14px}
+.sec{font-size:12.5px;font-weight:700;color:var(--mute);margin:14px 2px 8px;letter-spacing:.3px}
+/* table */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th,td{padding:7px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{color:var(--mute);font-weight:500;font-size:12px}
+td.n,th.n{text-align:right;white-space:nowrap;font-weight:700;width:1%}
+td.n.multi{white-space:normal;font-size:11.5px;line-height:1.3}
+/* training */
+.prog{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:0 0 12px}
+.prog i{display:block;height:100%;background:var(--g);transition:width .3s}
+.slide{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.07)}
+.slide .img{background:#eef1ef;display:flex;align-items:center;justify-content:center;min-height:140px;max-height:46vh;overflow:hidden}
+.slide .img img{width:100%;height:100%;object-fit:contain;max-height:46vh;display:block}
+.slide .body{padding:16px}
+.slide .no{font-size:12px;color:var(--g);font-weight:700;letter-spacing:.5px}
+.slide h2{margin:2px 0 10px;font-size:19px;line-height:1.3}
+.slide ul{margin:0;padding:0;list-style:none}
+.slide li{position:relative;padding-left:16px;margin:6px 0;font-size:14.5px}
+.slide li:before{content:"";position:absolute;left:0;top:10px;width:7px;height:7px;border-radius:50%;background:var(--g)}
+.slide li.arrow{padding-left:0;font-weight:700;color:var(--red)}
+.slide li.arrow:before{display:none}
+.slide li.do:before{background:#2E7D55}.slide li.dont:before{background:var(--red)}
+.ctr{display:flex;align-items:center;gap:12px;margin-top:14px}
+.ctr .btn{flex:1}
+.ring{position:relative;width:52px;height:52px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:5}
+.ring .bg{stroke:var(--line)}.ring .fg{stroke:var(--g);stroke-linecap:round;transition:stroke-dashoffset 1s linear}
+.ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:13px}
+.art{width:100%;padding:14px;background:linear-gradient(160deg,var(--g3),#fff)}
+.g8{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g8 div{background:#fff;border-radius:10px;padding:8px 4px 6px;text-align:center;position:relative;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.g8 b{position:absolute;left:5px;top:4px;font-size:10px;color:var(--g)}
+.g8 .e,.g4 .e{font-size:26px;display:block;line-height:1.2}
+.g8 small{display:block;font-size:10.5px;line-height:1.3;color:var(--ink);margin-top:3px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.g4 div{background:#fff;border-radius:10px;padding:10px 4px 8px;text-align:center;box-shadow:0 1px 2px rgba(0,0,0,.06)}
+.g4 b{display:block;font-size:14px;color:var(--g);margin-top:2px}
+.g4 small{display:block;font-size:10.5px;line-height:1.3;color:var(--mute);margin-top:2px}
+.flow{display:flex;align-items:center;justify-content:center;gap:4px}
+.flow span{background:#fff;border:1.5px solid var(--g);color:var(--g);border-radius:8px;padding:5px 7px;font-weight:700;font-size:12px;text-align:center;line-height:1.25}
+.flow i{color:var(--g);font-style:normal;font-size:13px}
+.stop{margin-top:10px;background:var(--red-bg);border-radius:10px;padding:8px 10px;font-size:12.5px;color:var(--ink)}
+.stop b{color:var(--red);display:block;margin-bottom:2px}
+.cap{font-size:11px;color:var(--mute);text-align:center;margin-top:8px}
+.ops .card{border-left:4px solid var(--g)}
+.kwc{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0 2px}
+.kwc span{font-size:11px;background:#f1f4f2;color:var(--mute);border-radius:6px;padding:2px 7px}
+.ob{margin:8px 0 0;padding:0;list-style:none}
+.ob li{position:relative;padding-left:14px;margin:5px 0;font-size:13.5px;line-height:1.5}
+.ob li:before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--g)}
+.ob li.h{padding-left:0;font-weight:700;color:var(--g);margin-top:8px}
+.ob li.h:before{display:none}
+.more{color:var(--g);font-size:13px;font-weight:700;background:none;padding:6px 0}
+.viewer{position:fixed;inset:0;background:#111;z-index:100;display:flex;flex-direction:column}
+.viewer .vh{color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px;font-size:14px;background:#000;padding-top:max(10px,env(safe-area-inset-top))}
+.viewer .vh b{flex:1;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.viewer .vh button{background:rgba(255,255,255,.15);color:#fff;border-radius:8px;padding:6px 12px}
+.viewer .vb{flex:1;overflow:auto;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y pinch-zoom}
+.viewer .vb img{display:block;width:100%;min-width:100%;margin-bottom:6px}
+.viewer .tip{color:#aaa;font-size:12px;text-align:center;padding:6px}
+.home-ops{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.home-ops button{background:#fff;border-radius:12px;padding:10px 12px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.06);font-size:13px;line-height:1.35}
+.home-ops button small{display:block;color:var(--g);font-weight:700;font-size:11px}
+.noimg{padding:28px 20px;text-align:center;width:100%;background:linear-gradient(135deg,var(--g3),#fff)}
+.noimg .big{font-size:44px;line-height:1}
+.steps{display:flex;gap:4px;justify-content:center;flex-wrap:wrap;margin-top:8px}
+.steps span{background:#fff;border:1.5px solid var(--g);color:var(--g);border-radius:8px;padding:6px 10px;font-weight:700;font-size:13px}
+.steps i{align-self:center;color:var(--g);font-style:normal}
+/* form */
+.f label{display:block;font-size:13px;color:var(--mute);margin:12px 0 4px}
+.f input{width:100%;padding:12px 14px;border:1.5px solid var(--line);border-radius:10px;background:#fff;outline:none;font-size:15px}
+.f input:focus{border-color:var(--g)}
+.done{text-align:center;padding:10px 0}
+.done .ok{width:72px;height:72px;border-radius:50%;background:var(--g3);color:var(--g);display:inline-flex;align-items:center;justify-content:center;font-size:36px;margin-bottom:10px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#222;color:#fff;padding:10px 16px;border-radius:10px;font-size:13.5px;z-index:50;opacity:0;transition:opacity .2s;pointer-events:none;max-width:90%;text-align:center}
+.toast.show{opacity:1}
+.foot{text-align:center;font-size:11px;color:var(--mute);padding:14px 0 0;line-height:1.7}.foot .dev{display:inline-block;margin-top:4px;font-size:10.5px;opacity:.8}
+.prer{background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin:0 0 12px}.prer.sm{margin:0 0 12px;background:var(--g3);box-shadow:none}
+.prer .ph{font-weight:700;font-size:14px}.prer .ph small{display:block;font-weight:400;font-size:12px;color:var(--mute);margin-top:2px}.prer .ph small b{color:var(--g)}
+.prer .pb{display:flex;gap:8px;margin-top:10px}.prer .pb a{flex:1;text-align:center;background:var(--g);color:#fff;text-decoration:none;font-weight:700;font-size:13.5px;padding:10px 6px;border-radius:10px;white-space:nowrap}
+.hid{display:none!important}
+@media (min-width:600px){main{padding:20px 20px 100px}}
+
+/* 현장용 자동 강조 */
+em.hr{font-style:normal;font-weight:800;color:var(--red)}
+em.hq{font-style:normal;font-weight:800;color:var(--g)}
+em.hn{font-style:normal;font-weight:800;color:var(--ink);background:#FFF4D6;border-radius:4px;padding:0 3px}
+.slide em.hn,.gsec em.hn{background:#FFF4D6}
+
+
+ul.sub{margin:4px 0 2px;padding:0;list-style:none}
+ul.sub li{position:relative;padding-left:4px;margin:3px 0;font-size:13.5px;color:#2b332f;line-height:1.5}
+ul.sub li:before{content:none}
+.gsec li ul.sub li:before,.ob li ul.sub li:before{content:none}
+
+/* ---- 스플래시 ---- */
+.splash{position:fixed;inset:0;z-index:200;background:linear-gradient(rgba(255,255,255,.28),rgba(255,255,255,.28)),#eef6f3 url(img/splash_bg.jpg) center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;cursor:pointer}
+.splash .glow{position:absolute;width:70vmin;height:70vmin;border-radius:50%;background:radial-gradient(circle,rgba(0,128,111,.14),rgba(0,128,111,0) 70%);animation:sp-glow 2.4s ease-out forwards}
+.splash .logos{display:flex;align-items:center;gap:0;position:relative;padding:30px 40px}
+.splash .logos:before{content:"";position:absolute;inset:-30px -50px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.95) 0%,rgba(255,255,255,.75) 40%,rgba(255,255,255,0) 72%);z-index:-1}
+.splash .lgo{height:46px;max-width:40vw;object-fit:contain;opacity:0;will-change:transform,opacity}
+.splash .lgo.lglogo{animation:sp-in-l .9s cubic-bezier(.2,.8,.2,1) .35s forwards}
+.splash .lgo.ets{animation:sp-in-r .9s cubic-bezier(.2,.8,.2,1) .85s forwards}
+.splash .x{width:0;height:2px;margin:0 16px;flex:none;background:linear-gradient(90deg,#A50034,#00806F);border-radius:2px;opacity:0;animation:sp-line .7s ease-out 1.5s forwards}
+.splash .tag{margin-top:26px;text-align:center;opacity:0;transform:translateY(10px);animation:sp-up .8s ease-out 2.0s forwards;position:relative;padding:14px 28px}
+.splash .tag:before{content:"";position:absolute;inset:-10px -30px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,255,255,.95) 0%,rgba(255,255,255,.7) 45%,rgba(255,255,255,0) 75%);z-index:-1}
+.splash .tag b{display:block;font-size:22px;font-weight:900;color:#0b1f1b;letter-spacing:-.3px;letter-spacing:-.2px}
+.splash .tag small{display:block;margin-top:7px;font-size:14px;font-weight:500;color:#1f3d36}
+.splash .skip{position:absolute;bottom:max(28px,env(safe-area-inset-bottom));font-size:12px;color:#6f7d77;text-align:center;line-height:1.7;opacity:0;animation:sp-up .6s ease-out 1.2s forwards}
+.splash.out{animation:sp-out .75s ease-in forwards}
+@keyframes sp-glow{0%{transform:scale(.4);opacity:0}40%{opacity:1}100%{transform:scale(1.6);opacity:.6}}
+@keyframes sp-in-l{0%{opacity:0;transform:translateX(-40px) scale(.9)}100%{opacity:1;transform:none}}
+@keyframes sp-in-r{0%{opacity:0;transform:translateX(40px) scale(.9)}100%{opacity:1;transform:none}}
+@keyframes sp-line{0%{width:0;opacity:0}100%{width:28px;opacity:1}}
+@keyframes sp-up{to{opacity:1;transform:none}}
+@keyframes sp-out{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(1.18)}}
+@media (prefers-reduced-motion:reduce){.splash *{animation-duration:.01s!important;animation-delay:0s!important}}
+/* ---- 새 홈/검색 ---- */
+.hsearch{background:#fff;border-radius:16px;padding:14px;box-shadow:0 2px 10px rgba(0,0,0,.08);margin-bottom:12px}
+.hsearch h2{margin:0 0 10px;font-size:19px;line-height:1.3}
+.hsearch .sbox{margin-bottom:10px}
+.topics{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.topics button{background:var(--g3);border-radius:12px;padding:10px 4px 8px;font-size:12px;color:var(--ink);display:flex;flex-direction:column;align-items:center;gap:3px;line-height:1.2}
+.topics button span{font-size:22px}
+.hero2{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#00806F,#0A5A4E);color:#fff;border-radius:16px;padding:14px 16px;margin-bottom:12px;text-align:left;width:100%}
+.hero2 .i{font-size:30px;flex:none}
+.hero2 b{display:block;font-size:16px}
+.hero2 small{opacity:.9;font-size:12.5px;display:block;margin-top:2px}
+.hero2 .go{margin-left:auto;background:#fff;color:var(--g);border-radius:10px;padding:8px 12px;font-weight:700;font-size:13px;flex:none}
+.acc{background:#fff;border-radius:14px;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:10px;overflow:hidden}
+.acc>button{width:100%;background:none;text-align:left;padding:14px 16px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;color:var(--ink)}
+.acc>button .ar{margin-left:auto;color:var(--mute);transition:transform .2s}
+.acc.open>button .ar{transform:rotate(90deg)}
+.acc .bd{display:none;padding:0 16px 14px}
+.acc.open .bd{display:block}
+.emg{display:flex;gap:8px;margin-bottom:12px}
+.emg a{flex:1;background:#fff;border-radius:12px;padding:10px 12px;text-decoration:none;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:center;gap:8px;font-size:13px}
+.emg a b{display:block;font-size:14px;color:var(--red);white-space:nowrap}
+.emg a span{min-width:0}
+.ctr{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);text-decoration:none;color:var(--ink);font-size:14px}
+.ctr span{min-width:0;line-height:1.35}.ctr span small{display:block;font-size:12.5px;color:var(--mute)}
+.ctr b{color:var(--g);white-space:nowrap;flex-shrink:0}
+.emg.sp a b{color:var(--g)}
+/* 답변 카드 */
+.gcard{background:#fff;border-radius:16px;box-shadow:0 2px 8px rgba(0,0,0,.07);margin-bottom:12px;overflow:hidden}
+.gcard .gh{padding:16px 16px 12px;display:flex;gap:12px;align-items:flex-start}
+.gcard .gh .ic{font-size:34px;line-height:1;flex:none}
+.gcard .gh h2{margin:0;font-size:19px;line-height:1.25}
+.gcard .gh p{margin:4px 0 0;font-size:14px;color:var(--red);font-weight:700;line-height:1.4}
+.gsec{padding:10px 16px 4px}
+.gsec h5{margin:0 0 6px;font-size:13px;letter-spacing:.2px;display:flex;align-items:center;gap:6px}
+.gsec.do h5{color:#1B6E4A}.gsec.dont h5{color:var(--red)}.gsec.viol h5{color:var(--amber)}
+.gsec ul{margin:0;padding:0;list-style:none}
+.gsec li{position:relative;padding-left:22px;margin:0 0 7px;font-size:14.5px;line-height:1.5}
+.gsec li:before{position:absolute;left:0;top:1px;font-size:14px}
+.gsec.do li:before{content:"✓";color:#1B6E4A;font-weight:900}
+.gsec.dont li:before{content:"✕";color:var(--red);font-weight:900}
+.gsec.viol li:before{content:"!";color:var(--amber);font-weight:900;left:4px}
+.gsec.viol{background:var(--amber-bg);margin:8px 12px 0;border-radius:10px;padding:10px 12px}
+.gsec.viol li{font-size:13.5px;margin-bottom:5px}
+.chip{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--red-bg);color:var(--red);vertical-align:middle;margin:0 1px;white-space:nowrap}
+.chip.pt{background:#eef1ef;color:var(--ink)}
+.chip.red{background:var(--red);color:#fff}
+.gimg{margin:10px 16px 0;border-radius:10px;overflow:hidden;background:#eef1ef}
+.gimg img{width:100%;display:block}
+.gfoot{padding:12px 16px 14px}
+.gfoot .btn{margin-top:6px}
+.refs{font-size:12.5px;color:var(--mute);display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.refs span{background:#f1f4f2;border-radius:6px;padding:2px 7px;color:var(--ink)}
+.sugg{background:#fff;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,.08);margin:-6px 0 12px;overflow:hidden}
+.sugg button{display:block;width:100%;text-align:left;background:none;padding:11px 14px;border-bottom:1px solid var(--line);font-size:14.5px;color:var(--ink)}
+.sugg button b{color:var(--g)}
+.sugg button small{color:var(--mute);margin-left:6px;font-size:12px}
+.more-list button{width:100%;background:#fff;border-radius:12px;padding:14px 16px;text-align:left;box-shadow:0 1px 3px rgba(0,0,0,.06);margin-bottom:8px;display:flex;align-items:center;gap:12px;font-size:15px;color:var(--ink)}
+.more-list button span{font-size:22px}
+.more-list button small{display:block;color:var(--mute);font-size:12px;font-weight:400;margin-top:1px}
+.more-list button i{margin-left:auto;font-style:normal;color:var(--mute)}
+.logo img.lges{height:19px;width:auto}
+.top{gap:12px}
+@media(max-width:380px){.logo img.lges{height:16px}.top .t{font-size:14.5px}}
+</style>
+</head>
+<body>
+<div class="splash hid" id="splash" onclick="endSplash(true)">
+  <div class="glow"></div>
+  <div class="logos"><img class="lgo lglogo" src="../img/lges_logo.png" alt="LG Energy Solution" style="height:40px;max-width:72vw"></div>
+  <div class="tag"><b>함께 만드는 안전한 현장</b><small>고객사 현장 안전 길잡이 · 주식회사 이티에스</small></div>
+  <div class="skip"><span id="spVer"></span><br>화면을 누르면 건너뜁니다</div>
+</div>
+<div class="app">
+  <header class="top">
+    <div class="logo"><img src="../img/lges_logo_white.png" alt="LG Energy Solution" class="lges"></div>
+    <div class="t">현장 안전 길잡이<small>작업수칙 검색 · 오창</small></div>
+    <div class="hbtns"><button class="back hid" id="backBtn" onclick="goBack()">‹ <span class="bt">뒤로</span></button></div>
+  </header>
+  <main id="main"></main>
+  <nav class="nav"><div class="w">
+    <button data-v="home" onclick="go('home')"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>홈</button>
+    <button data-v="search" onclick="go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>검색</button>
+    
+    <button data-v="more" onclick="go('more')"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>더보기</button>
+  </div></nav>
+</div>
+<div class="toast" id="toast"></div>
+<script src="../data.js?v=1.4.20261010"></script>
+<script>
+/* ===== 설정 ===== */
+const GAS_URL = ''; // GAS 웹앱 URL (교육이수 기록·설정값 전용)
+const IMG = '../img/';
+/* 내용(가이드·규정·슬라이드·벌점표)은 data.js 에 있습니다. 매달 업데이트 = data.js 교체 */
+let D = null, view = 'home', T = {};
+const $ = s => document.querySelector(s);
+const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function verLine(dev){ const v=D.version||{}; return `LG에너지솔루션 오창 협력사 안전 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}<br><span class="dev">제작 · ㈜이티에스 환경안전팀</span>`; }
+function prereport(small){ const r=(D.version||{}).prereport||{}; if(!r.EP1) return ''; return `<div class="prer${small?' sm':''}"><div class="ph">📲 7대 고위험 사전신고방 <small>공사 전일 14~15시 · 참여코드 <b>${esc(r.code)}</b></small></div><div class="pb"><a href="${r.EP1}" target="_blank" rel="noopener">EP1 신고방 열기</a><a href="${r.EP2}" target="_blank" rel="noopener">EP2 신고방 열기</a></div></div>`; }
+function dash(t){ const a=esc(t).split(' — '); return a.length>1 ? a.map(x=>`<span style="white-space:nowrap">${x}</span>`).join(' — ') : esc(t); }
+// **굵게** 와 |칩| 표기 → HTML
+const rich0 = s => esc(s).replace(/\*\*(.+?)\*\*/g,'<b>$1</b>').replace(/\|([^|]+?)\|/g,(m,t)=>`<span class="chip ${/점$/.test(t)?'pt':(/퇴출|거래제한/.test(t)?'red':'')}">${t}</span>`);
+// 현장용 자동 강조: 금지·중지 계열은 빨강, 필수 계열은 청록, 수치+단위는 굵게 (태그·칩 내부는 건드리지 않음)
+const HL_RED = /(영구\s?퇴출|퇴출|작업\s?중지|전면\s?중지|즉시\s?중지|거래\s?제한|입찰\s?제한|중지|금지|불가|절대|즉시|위반)/g;
+const HL_REQ = /(반드시|필수|2인\s?1조|사전\s?신고|허가서|그네식|화재감시자|신호수|LOTO)/g;
+const HL_NUM = /(\d+(?:\.\d+)?\s?(?:~\s?\d+(?:\.\d+)?\s?)?(?:m|M|mm|cm|kg|ton|T|t|점|시간|시|분|초|회|개|℃|%|km\/h|배|층|명|일))(?![\w가-힣])/g;
+function hlText(t){ return t.replace(HL_RED,'<em class="hr">$1</em>').replace(HL_REQ,'<em class="hq">$1</em>').replace(HL_NUM,'<em class="hn">$1</em>'); }
+function hlHtml(html){ let out='', inChip=0; html.split(/(<[^>]+>)/).forEach(seg=>{ if(!seg) return; if(seg[0]==='<'){ if(/^<span class="chip/.test(seg)||/^<em/.test(seg)) inChip++; else if(/^<\/(span|em)>/.test(seg)&&inChip) inChip--; out+=seg; } else out+= inChip?seg:hlText(seg); }); return out; }
+const rich = s => hlHtml(rich0(s));
+// "머리말 1) … 2) … ① … ②" 처럼 한 줄에 이어진 번호 항목을 줄 단위로 분리
+function splitNumbered(t){
+  const parts=String(t).split(/\s+(?=(?:\d{1,2}\)|[①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮])\s*)/);
+  if(parts.length<2) return {head:t, subs:[]};
+  const first=parts[0]; const isHead=!/^(\d{1,2}\)|[①-⑮])/.test(first.trim());
+  return isHead ? {head:first, subs:parts.slice(1)} : {head:'', subs:parts};
+}
+function liRich(x, cls){ const {head,subs}=splitNumbered(x); if(!subs.length) return `<li class="${cls||''}">${rich(x)}</li>`;
+  return `<li class="${cls||''}">${head?rich(head):''}<ul class="sub">${subs.map(z=>`<li>${rich(z)}</li>`).join('')}</ul></li>`; }
+const toast = m => { const t=$('#toast'); t.textContent=m; t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),2600); };
+const setting = (k,def) => (D && D.settings && D.settings[k]!==undefined && D.settings[k]!=='') ? D.settings[k] : def;
+const pd = d => { const m=String(d||'').match(/(\d{4})-(\d{2})-(\d{2})/); return m? new Date(+m[1],+m[2]-1,+m[3]) : new Date(d); };
+const daysSince = d => { if(!d) return 9e9; return Math.round((Date.now()-pd(d))/86400000); };
+const isNew = d => { const n=daysSince(d); return n>=-400 && n<=Number(setting('변경됨_표시_일수',45)); };
+const fmt = d => String(d||'').slice(0,10);
+const hasGas = () => GAS_URL.startsWith('http');
+
+async function loadData(){
+  D = window.FALLBACK_DATA; render();
+  if(!hasGas()) return;
+  try{ // 서버에서는 설정값만 받아옴 (장당_초, 유효기간 등)
+    const r = await fetch(GAS_URL+'?action=data', {cache:'no-store'}); const j = await r.json();
+    if(j && j.settings && Object.keys(j.settings).length){ D.settings = Object.assign({}, D.settings, j.settings); if(view!=='train') render(); }
+  }catch(e){ console.warn('settings fetch fail', e); }
+}
+// 화면 이동을 브라우저 기록에 연결: 폰 뒤로가기 = 앱 뒤로가기 (홈에서 한 번 더 누르면 앱을 나감)
+const snap = () => ({view, arg:T.arg, q:T.q, chip:T.chip, pcat:T.pcat});
+function apply(h){ view=h.view; T.arg=h.arg; T.q=h.q; T.chip=h.chip; T.pcat=h.pcat; render(); window.scrollTo(0,0); }
+function go(v, arg){ const same = (v===view && !arg); if(!same){ try{ history.replaceState(snap(), ''); }catch(e){} } view=v; T.arg=arg; if(!same){ try{ history.pushState(snap(), ''); }catch(e){} } render(); window.scrollTo(0,0); }
+function goBack(){ if(history.state && history.state.view){ history.back(); } else { apply({view:'home'}); try{ history.replaceState(snap(), ''); }catch(e){} } }
+window.addEventListener('popstate', e => { apply((e.state && e.state.view) ? e.state : {view:'home'}); });
+try{ history.replaceState({view:'home'}, ''); }catch(e){}
+function render(){
+  const navMap={home:'home',search:'search',guide:'search',train:'train',result:'train',more:'more',ops:'more',penalty:'more',detail:'more',status:'more'};
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('on', b.dataset.v===navMap[view]));
+  $('#backBtn').classList.toggle('hid', view==='home');
+  const m=$('#main');
+  if(view==='home') m.innerHTML=homeView();
+  else if(view==='search'){ m.innerHTML=searchView(); const i=$('#q'); if(i){ i.value=T.q||''; i.oninput=()=>{T.q=i.value; renderResults();}; i.onkeydown=e=>{ if(e.key==='Enter'){ i.blur(); } }; renderResults(); if(T.focus){ i.focus(); T.focus=false; } } }
+  else if(view==='guide') m.innerHTML=guideView();
+  else if(view==='train') m.innerHTML=trainView();
+  else if(view==='more') m.innerHTML=moreView();
+  else if(view==='ops') m.innerHTML=opsView();
+  else if(view==='penalty') m.innerHTML=penaltyView();
+  else if(view==='detail') m.innerHTML=detailView();
+  else if(view==='status') m.innerHTML=statusView();
+  if(view==='train' && T.started && !T.finished) startTimer();
+}
+const TOPICS = () => (D.guides||[]).slice(0,12);
+
+
+/* ===== 스플래시: 하루 첫 실행 또는 ?splash ===== */
+function showSplash(){
+  const el=$('#splash'); if(!el) return;
+  if(/[?&]nosplash/.test(location.search)) return; // 시연·점검용으로 끌 때만
+  const v=(window.FALLBACK_DATA&&window.FALLBACK_DATA.version)||{}; const ve=$('#spVer'); if(ve) ve.innerHTML=`${esc(v['버전']||'')} · 최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')} · 최근 반영 ${esc(v['최근반영']||'')}`;
+  el.classList.remove('hid'); document.body.style.overflow='hidden';
+  T.splashTimer=setTimeout(()=>endSplash(false), 3400);
+}
+function endSplash(skip){
+  const el=$('#splash'); if(!el||el.classList.contains('hid')||el.classList.contains('out')) return;
+  clearTimeout(T.splashTimer); el.classList.add('out');
+  setTimeout(()=>{ el.classList.add('hid'); document.body.style.overflow=''; }, skip?300:750);
+}
+
+/* ===== 홈 ===== */
+function homeView(){
+  const os = D.onestrike.filter(r=>r['구분']==='One Strike Out');
+  return `
+  <div class="hsearch">
+    <h2>어떤 작업 하세요?</h2>
+    <div class="sbox"><input id="hq" placeholder="예: 사다리, 그라인더, 지게차, LOTO" onfocus="T.focus=true;go('search')"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+    <div class="topics">${TOPICS().map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['짧은이름']||g['제목'])}</button>`).join('')}</div>
+  </div>
+  
+  <div class="acc" id="accOS"><button onclick="this.parentNode.classList.toggle('open')"><span><span style="white-space:nowrap">⛔ 1회 적발 시 바로 퇴출</span> — <span style="white-space:nowrap">7가지</span></span><span class="ar">›</span></button>
+    <div class="bd"><ol class="list" style="font-size:14px">${os.map(r=>`<li>${esc(r['위반내역'])}</li>`).join('')}</ol>
+    <p style="margin:8px 0 0;font-size:13px;color:var(--mute)">근로자 영구 퇴출 · 회사 거래제한 (26.10.1 시행, LG에너지솔루션 One Strike Out)</p></div></div>
+  <div class="sec" style="margin-top:4px">🚨 비상신고 — 화재·사고·누출 시 즉시</div>
+  <div class="emg" title="누르면 전화"><a href="tel:0432197119">☎<span>방재센터 EP1<b>043-219-7119</b></span></a><a href="tel:0437180119">☎<span>방재센터 EP2<b>043-718-0119</b></span></a></div>
+  <div class="sec">📞 작업·허가서·안전 문의 — Safety Police</div>
+  <div class="emg sp"><a href="tel:01054873122">☎<span>EP1 이상억 팀장<b>010-5487-3122</b></span></a><a href="tel:01098006229">☎<span>EP2 변귀림 팀장<b>010-9800-6229</b></span></a></div>
+  <p style="font-size:12px;color:var(--mute);margin:-4px 2px 12px">비상 외 안전 문의는 환경안전팀이 아닌 Safety Police로 연락하세요. 총괄·주정차 문의는 더보기에 있습니다.</p>
+  <p class="foot">${verLine()}</p>`;
+}
+
+/* ===== 검색 ===== */
+function norm(s){ return String(s||'').toLowerCase().replace(/\s+/g,''); }
+function hit(q, ...fields){ if(!q) return true; const qs=norm(q).split(/[,\/]/).filter(Boolean); const hay=norm(fields.join(' ')); return qs.some(x=>hay.includes(x)); }
+function searchView(){
+  if(T.arg){ T.q=T.arg; T.arg=null; }
+  return `<div class="sbox"><input id="q" placeholder="작업명으로 검색 (예: 사다리, 용접, 지게차)"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+  <div id="sugg"></div><div class="res" id="res"></div>`;
+}
+function guideScore(g,q){ const n=norm(q); if(!n) return 0; let s=0; if(norm(g['제목']).includes(n)) s+=100; if(norm(g['검색어']).split(',').some(w=>w.includes(n)||n.includes(w)&&w.length>1)) s+=60; if(norm(g['한줄']).includes(n)) s+=20; if(norm(g['하세요'].join(' ')+g['금지'].join(' ')).includes(n)) s+=10; return s; }
+function renderResults(){
+  const box=$('#res'), sg=$('#sugg'); if(!box) return; const q=(T.q||'').trim();
+  if(!q){ sg.innerHTML=''; box.innerHTML=`<div class="sec">자주 찾는 작업</div><div class="card" style="padding:12px"><div class="topics" style="grid-template-columns:repeat(3,1fr)">${(D.guides||[]).map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['제목'])}</button>`).join('')}</div></div>`; return; }
+  const G=(D.guides||[]).map(g=>[guideScore(g,q),g]).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).map(x=>x[1]);
+  sg.innerHTML = G.length>1 ? `<div class="sugg">${G.slice(0,5).map(g=>`<button onclick="go('guide','${g.id}')">${g['아이콘']} <b>${esc(g['제목'])}</b><small>${dash(g['한줄'])}</small></button>`).join('')}</div>` : '';
+  let html='';
+  if(G.length){ html+=guideCard(G[0], false); if(G.length>1) html+=`<div class="sec">관련 작업</div>`+G.slice(1,4).map(g=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${g.id}')"><b>${g['아이콘']} ${esc(g['제목'])}</b><div style="font-size:13px;color:var(--mute)">${dash(g['한줄'])}</div></div>`).join(''); }
+  // 가이드가 없을 때만 규정·벌점 직접 검색
+  if(!G.length){
+    const O=(D.ops||[]).filter(o=>hit(q,o['코드'],o['제목'],o['분류'],o['연관검색어'],o['내용']));
+    if(O.length) html+='<div class="sec">LG 규정 원문</div><div class="ops">'+O.slice(0,5).map(o=>opsCard(o,false)).join('')+'</div>';
+    const P=D.penalty.filter(p=>hit(q,p['대분류'],p['세부항목'],p['키워드'],p['코드']));
+    if(P.length) html+='<div class="sec">벌점표</div>'+P.slice(0,8).map(p=>penaltyCard(p)).join('');
+    const C=D.common.filter(c=>hit(q,c['구분'],c['항목'],c['내용']));
+    if(C.length) html+='<div class="sec">사업장 공통수칙</div>'+C.map(c=>`<div class="card"><h4>${esc(c['항목'])}</h4><p>${esc(c['내용'])}</p><div class="src">${esc(c['출처'])}</div></div>`).join('');
+  }
+  if(!html) html=`<div class="empty">"${esc(q)}" 검색 결과가 없습니다.<br><span style="font-size:13px">작업 이름(예: 사다리, 용접, 지게차)으로 검색하거나 아래 목록에서 골라 보세요.</span></div><div class="card" style="padding:12px"><div class="topics" style="grid-template-columns:repeat(3,1fr)">${(D.guides||[]).map(g=>`<button onclick="go('guide','${g.id}')"><span>${g['아이콘']}</span>${esc(g['제목'])}</button>`).join('')}</div></div>`;
+  box.innerHTML=html;
+}
+function guideCard(g, full){
+  const pens=(g['벌점코드']||[]).map(c=>D.penalty.find(p=>p['코드']===c)).filter(Boolean);
+  const opsL=(g['근거OPS']||[]).map(c=>(D.ops||[]).find(o=>o['코드']===c)).filter(Boolean);
+  const li=(arr,cls)=>`<ul>${arr.map(x=>liRich(x)).join('')}</ul>`;
+  return `<div class="gcard">
+    <div class="gh"><span class="ic">${g['아이콘']}</span><div><h2>${esc(g['제목'])}</h2><p>${dash(g['한줄'])}</p></div></div>
+    <div class="gsec do"><h5>✅ 이렇게 하세요</h5>${li(g['하세요'])}</div>
+    <div class="gsec dont"><h5>⛔ 하면 안 됩니다</h5>${li(g['금지'])}</div>
+    ${g['위반']&&g['위반'].length?`<div class="gsec viol"><h5>⚠️ 위반하면</h5>${li(g['위반'])}</div>`:''}
+    ${g['고위험']?prereport(true):''}
+    ${g['이미지']?`<div class="gimg"><img src="${IMG}${esc(g['이미지'])}" alt="" loading="lazy"></div>`:''}
+    <div class="gfoot">
+      ${opsL.length||pens.length?`<div class="refs">근거 ${opsL.map(o=>`<span>${esc(o['코드'])} ${esc(o['제목'])}</span>`).join('')}${pens.map(p=>`<span>벌점표 ${esc(p['코드'])}</span>`).join('')}</div>`:''}
+      ${opsL.length?`<button class="btn ghost" onclick="go('guide','${g.id}');setTimeout(()=>{const e=document.getElementById('gops');if(e){e.classList.add('open');e.scrollIntoView({behavior:'smooth'});}},50)">📄 LG 원문 보기 (${opsL.length}건)</button>`:''}
+      ${!full?`<button class="btn" style="margin-top:8px" onclick="go('guide','${g.id}')">자세히 보기</button>`:''}
+    </div>
+  </div>`;
+}
+function guideView(){
+  const g=(D.guides||[]).find(x=>x.id===T.arg) || (D.guides||[])[0]; if(!g) return '<div class="empty">가이드가 없습니다</div>';
+  const opsL=(g['근거OPS']||[]).map(c=>(D.ops||[]).find(o=>o['코드']===c)).filter(Boolean);
+  const pens=(g['벌점코드']||[]).map(c=>D.penalty.find(p=>p['코드']===c)).filter(Boolean);
+  const rel=(D.guides||[]).filter(x=>x.id!==g.id && (x['근거OPS']||[]).some(c=>(g['근거OPS']||[]).includes(c))).slice(0,3);
+  return guideCard(g,true)
+   + (opsL.length?`<div class="acc" id="gops"><button onclick="this.parentNode.classList.toggle('open')">📄 LG 규정 원문 (${opsL.length}건)<span class="ar">›</span></button><div class="bd"><div class="ops" style="margin-top:6px">${opsL.map(o=>opsCard(o,true)).join('')}</div></div></div>`:'')
+   + (pens.length?`<div class="acc"><button onclick="this.parentNode.classList.toggle('open')">⚠️ 관련 벌점 항목 (${pens.length})<span class="ar">›</span></button><div class="bd">${pens.map(p=>penaltyCard(p)).join('')}</div></div>`:'')
+   + (rel.length?`<div class="sec">함께 보면 좋은 작업</div>${rel.map(x=>`<div class="card" style="padding:12px 14px;cursor:pointer" onclick="go('guide','${x.id}')"><b>${x['아이콘']} ${esc(x['제목'])}</b><div style="font-size:13px;color:var(--mute)">${dash(x['한줄'])}</div></div>`).join('')}`:'');
+}
+
+function penaltyCard(p){
+  const up = p['변경']==='상향'||p['변경']==='신설';
+  return `<div class="card"><div class="ptrow"><div><div class="tag"><span class="pill gray">${esc(p['코드'])} ${esc(p['대분류'])}</span>${p['작업중지']?'<span class="pill red">작업중지</span>':''}${up?`<span class="pill amber">${esc(p['변경'])}</span>`:''}</div><h4 style="margin:0">${esc(p['세부항목'])}</h4></div><div class="pt">${esc(p['감점'])}<small>점</small></div></div>
+  ${up?`<p class="sub" style="margin-top:6px">26.7.1 개정 전 ${esc(p['구감점_25년9월'])}점 → <b>${esc(p['감점'])}점</b></p>`:''}<div class="src">${esc(p['출처'])}</div></div>`;
+}
+
+/* ===== 더보기 ===== */
+function moreView(){
+  const items=[['📄','LG 규정 원문 (OPS)','협의체에 공유된 운영표준 '+(D.ops||[]).length+'건, 원문 페이지 보기','ops'],['⚠️','벌점표','위반 항목별 감점·작업중지 ('+D.penalty.length+'항목)','penalty'],['↻','규정 변경 이력 · 월별 강조사항','언제 무엇이 바뀌었는지','detail']];
+  const portalBtn=`<button onclick="location.href='https://sugilyang.github.io/ets-safety/'"><span>🏠</span><div><div style="font-weight:700">ETS 안전포털</div><small>안전신문고 · TBM · 위험성평가 등</small></div><i>›</i></button>`;
+  const adminBtn=`<button onclick="location.href='admin.html'"><span>🔐</span><div><div style="font-weight:700">관리자 · 교육 이수 현황</div><small>생산관리 전용 · 비밀번호 필요</small></div><i>›</i></button>`;
+  const changes=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1).slice(0,2);
+  return `<div class="more-list">${items.map(([i,t,s,v])=>`<button onclick="go('${v}')"><span>${i}</span><div><div style="font-weight:700">${t}</div><small>${s}</small></div><i>›</i></button>`).join('')}</div>
+  <div class="sec">연락처 (누르면 전화)</div>
+  <div class="card" style="padding:6px 14px">
+    ${[['🚨 비상 — 화재·사고·누출 즉시 신고','방재센터 EP1','','043-219-7119'],['','방재센터 EP2','','043-718-0119'],['📞 작업·안전 문의, 교육 협의','Safety Police EP1','이상억 팀장','010-5487-3122'],['','Safety Police EP2','변귀림 팀장','010-9800-6229'],['안전 지도·법규·KOSHA 문의','Safety Police 총괄','곽충호 소장','010-3871-7939'],['주·정차 관련','LG 사무실','','043-718-0123']].map(([h,n,s,t])=>`${h?`<div style="font-size:12px;color:var(--mute);margin:10px 0 2px;font-weight:700">${h}</div>`:''}<a href="tel:${t.replace(/-/g,'')}" class="ctr"><span>${n}${s?`<small>${s}</small>`:''}</span><b>☎ ${t}</b></a>`).join('')}
+    <div class="src">26년 5·7·8월 협의체 "공사 안전 관련 문의 사항 안내" · 이메일 ssmteam@lgensol.com / kch1004@lgensol.com</div>
+  </div>
+  <div class="sec">작업시간 · 사전신고</div>
+  <div class="card"><div class="kv">
+    <b>작업 시작</b><span>09:00<br><small>LG 담당자 협의 시 06:00~09:00</small></span>
+    <b>연장 작업</b><span>17~22시<br><small>일반은 당일 17시, 크레인은 당일 13시까지 승인 · 고위험 불가</small></span>
+    <b>주말 허가서</b><span>08~09시 / 13~13:30 발급<br><small>작업은 08시부터</small></span>
+    <b>7대 고위험</b><span>전일 14~15시 사전신고방 <span style="white-space:nowrap">(코드 2119)</span><br><small>3m↑고소 · 화기 · 활성화 · 전기실 · 밀폐 · 고중량</small></span>
+  </div>${prereport(false)}<div class="kv" style="display:none">
+  </div></div>
+  <div class="sec">최근 규정 변경</div>
+  ${changes.map(c=>`<div class="card" style="padding:12px 14px"><span style="font-size:12px;color:var(--mute)">${esc(c['시행일'])}</span> ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:14px;margin-top:2px">${esc(c['내용'])}</div></div>`).join('')}
+  <p class="foot">${verLine(true)}</p>`;
+}
+function statusView(){
+  return `<div class="card"><h3><span class="ic">✓</span>내 교육 이수 상태</h3>
+    <div class="row"><input id="chk" placeholder="이름 또는 연락처 뒤 4자리" style="flex:1;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px"><button class="btn sm" onclick="checkMe()">조회</button></div>
+    <div id="chkRes" style="margin-top:8px;font-size:13.5px"></div></div>`;
+}
+async function checkMe(){
+  const q=$('#chk').value.trim(); const box=$('#chkRes'); if(!q) return;
+  if(!hasGas()){ box.innerHTML='<span class="pill gray">서버 연결 전</span>'; return; }
+  box.textContent='조회 중…';
+  try{ const r=await fetch(GAS_URL+'?action=check&q='+encodeURIComponent(q)); const j=await r.json();
+    if(!j.rows||!j.rows.length){ box.innerHTML='<span class="pill gray">기록 없음</span> 교육 이수 기록이 없습니다.'; return; }
+    box.innerHTML=j.rows.map(r=>{ const left=Math.round((pd(r['만료일'])-new Date().setHours(0,0,0,0))/86400000); const st=left<0?'<span class="pill red">만료</span>':left<=30?'<span class="pill amber">만료 임박</span>':'<span class="pill">유효</span>';
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--line)">${st} <b>${esc(r['이름'])}</b> (${esc(r['업체명'])}) · 이수 ${esc(fmt(r['이수일시']))} · 만료 <b>${esc(fmt(r['만료일']))}</b></div>`; }).join('');
+  }catch(e){ box.textContent='조회 실패. 네트워크를 확인하세요.'; }
+}
+function detailView(){
+  const ch=[...D.changes].sort((a,b)=>b['시행일']<a['시행일']?-1:1);
+  const hl=[...D.highlights].sort((a,b)=>b['월']<a['월']?-1:1);
+  return `<div class="sec">규정 변경 이력</div><div class="card" style="padding:8px 16px">${ch.map(c=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><span style="flex:none;color:var(--mute);font-size:12.5px;width:84px;padding-top:2px">${esc(c['시행일'])}</span><span>${esc(c['내용'])} ${isNew(c['시행일'])?'<span class="pill red">변경됨</span>':''}<div style="font-size:11.5px;color:var(--mute)">${esc(c['출처'])}</div></span></div>`).join('')}</div>
+  <div class="sec">월별 협의체 강조사항</div>${hl.map(h=>`<div class="card" style="padding:12px 14px"><div class="tag"><span class="pill gray">${esc(h['월'])}</span></div><h4 style="margin:4px 0 6px;font-size:14.5px">${esc(h['제목'])}</h4><p style="margin:0;font-size:13.5px">${esc(h['내용'])}</p><div class="src">${esc(h['출처'])}</div></div>`).join('')}`;
+}
+
+/* ===== 교육 ===== */
+function trainView(){
+  const n=D.slides.length, sec=Number(setting('장당_초',30));
+  if(T.finished) return doneView();
+  if(!T.started){
+    return `<div class="card">
+      <h3><span class="ic">▶</span>LGES 현장 출입 전 안전교육</h3>
+      <p style="margin:0 0 10px;font-size:14px">LG에너지솔루션 협의체 자료와 내규에서 가장 중요한 내용만 ${n}장으로 정리했습니다. 한 장당 <b>${sec}초</b> 이상 읽어야 다음 장으로 넘어갑니다.</p>
+      <ul class="list" style="font-size:14px;color:var(--mute)">
+        <li>소요시간 약 ${Math.ceil(n*sec/60)}분 · 중간에 나가면 처음부터 다시 시작</li>
+        <li>마지막에 이름·업체명·연락처·이메일을 입력하면 이수 처리</li>
+        <li>유효기간 ${esc(setting('유효기간_개월',6))}개월 · 만료 전 이메일로 재교육 안내</li>
+      </ul>
+      <button class="btn" style="margin-top:14px" onclick="startTrain()">교육 시작</button>
+    </div>
+    <div class="sec">교육 내용</div>
+    <div class="card" style="padding:8px 16px">${D.slides.map((s,i)=>`<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><b style="color:var(--g);width:22px;flex:none">${i+1}</b>${esc(s['제목'])}</div>`).join('')}</div>`;
+  }
+  const s=D.slides[T.i]; const items=String(s['본문']).split('|').map(x=>x.trim()).filter(Boolean);
+  const nw=t=>hlHtml(esc(t).replace(/((?:EP\d\s)?\d{2,3}-\d{3,4}-\d{4})/g,'<span style="white-space:nowrap">$1</span>'));
+  const li=items.map(x=>{ let cls=''; if(/^→/.test(x)) cls='arrow'; else if(/^DO:/.test(x)) cls='do'; else if(/^DON'?T:/.test(x)) cls='dont'; return `<li class="${cls}">${nw(x)}</li>`; }).join('');
+  const img = s['이미지'] ? `<img src="${IMG}${esc(s['이미지'])}" alt="">` : fallbackArt(T.i);
+  const r=22, c=2*Math.PI*r;
+  return `<div class="prog"><i style="width:${(T.i)/n*100}%"></i></div>
+  <div class="slide">
+    <div class="img">${img}</div>
+    <div class="body">
+      <div class="no">${T.i+1} / ${n}</div>
+      <h2>${dash(s['제목'])}</h2>
+      <ul>${li}</ul>
+      <div class="src">${esc(s['출처'])}</div>
+      <div class="ctr">
+        <div class="ring"><svg width="52" height="52"><circle class="bg" cx="26" cy="26" r="${r}"/><circle class="fg" id="ringFg" cx="26" cy="26" r="${r}" stroke-dasharray="${c}" stroke-dashoffset="0"/></svg><b id="ringTxt">${sec}</b></div>
+        <button class="btn" id="nextBtn" disabled onclick="nextSlide()">${T.i+1<n?'다음':'교육 완료 → 정보 입력'}</button>
+      </div>
+    </div>
+  </div>`;
+}
+function fallbackArt(i){
+  const t=D.slides[i]['제목'];
+  if(/주요안전수칙/.test(t)){
+    const R=[['🔒','안전장치 임의<br>해제 금지'],['📝','작업 전<br>위험성평가'],['🚫','무허가<br>작업 금지'],['⚡','전원 OFF 후<br>LOTO'],['🏗️','중장비 정격하중<br>반경 출입금지'],['🫧','밀폐작업<br>가스 측정'],['🪢','추락방지<br>안전대'],['🔥','방화포 설치<br>화재감시자']];
+    return `<div class="art"><div class="g8">${R.map((r,k)=>`<div><b>${k+1}</b><span class="e">${r[0]}</span><small>${r[1]}</small></div>`).join('')}</div><div class="cap">LG에너지솔루션 공사 안전관리 내규 — 공사 주요안전수칙</div></div>`;
+  }
+  if(/허가서/.test(t)) return `<div class="art"><div class="flow"><span>허가서<br>수령</span><i>→</i><span>내용<br>확인</span><i>→</i><span>교육</span><i>→</i><span>서명</span><i>→</i><span>현장<br>비치</span></div>
+    <div class="stop"><b>즉시 작업중지</b><div>❌ 카페·편의점·흡연실·사무실에서 허가서 작성</div><div>❌ 현장에 맞지 않는 체크리스트에 "V" 표시</div></div><div class="cap">26년 3월 Safety Police — 안전작업허가서 실태</div></div>`;
+  if(/규칙/.test(t)) return `<div class="art"><div class="g4"><div><span class="e">🕘</span><b>09:00</b><small>작업 시작<br>연장 17~22시</small></div><div><span class="e">🚗</span><b>20km/h</b><small>횡단보도 일시정지<br>운전 중 휴대폰 ✕</small></div><div><span class="e">🚭</span><b>지정장소</b><small>실내·전자담배<br>전부 금지</small></div><div><span class="e">🍺</span><b>0.03↑</b><small>음주·마약<br>영구퇴출</small></div></div></div>`;
+  return `<div class="noimg"><div class="big">🦺</div></div>`;
+}
+function startTrain(){ T={started:true,i:0,finished:false,log:[]}; render(); }
+function startTimer(){
+  clearInterval(T.tm); const perSlide=Number(D.slides[T.i]['초'])||Number(setting('장당_초',30));
+  if(T.slideStart===undefined || T.timerFor!==T.i){ T.slideStart=Date.now(); T.timerFor=T.i; }
+  const fg=$('#ringFg'), tx=$('#ringTxt'), btn=$('#nextBtn'); if(!fg) return;
+  const c=2*Math.PI*22;
+  const tick=()=>{ const left=Math.max(0, perSlide-Math.floor((Date.now()-T.slideStart)/1000)); tx.textContent=left; fg.style.strokeDashoffset=c*(1-left/perSlide); if(left<=0){ clearInterval(T.tm); btn.disabled=false; tx.textContent='✓'; } };
+  tick(); T.tm=setInterval(tick,500);
+}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden && view==='train' && T.started && !T.finished) startTimer(); });
+function nextSlide(){ clearInterval(T.tm); T.log.push(Date.now()); if(T.i+1<D.slides.length){ T.i++; render(); window.scrollTo(0,0);} else { T.finished=true; render(); window.scrollTo(0,0);} }
+function doneView(){
+  if(T.sent) return `<div class="card done">
+      <div class="ok">✓</div><h2 style="margin:0 0 6px">교육 이수 완료</h2>
+      <p style="margin:0;color:var(--mute);font-size:14px"><b style="color:var(--ink)">${esc(T.sent.name)}</b>님 (${esc(T.sent.company)})</p>
+      <div class="kv" style="justify-content:center;margin:14px auto 0;max-width:260px;text-align:left"><b>이수일</b><span>${fmt(new Date().toISOString())}</span><b>유효기간</b><span><b>${esc(T.sent.expire)}</b>까지</span></div>
+      ${T.sent.queued?`<div class="alert" style="text-align:left;margin-top:14px"><b>통신 상태가 좋지 않아 기록을 폰에 저장했습니다.</b><br>통신이 되는 곳에서 이 앱을 다시 열면 자동으로 전송됩니다 (앱을 닫아도 기록은 폰에 남습니다). 전송되면 확인 메일이 갑니다.</div>`:`<p style="font-size:13px;color:var(--mute);margin:14px 0 0">이수 확인 메일을 ${esc(T.sent.email)}로 보냈습니다. 생산관리 확인 후 고객사 현장에 출입할 수 있습니다.</p>`}
+      <button class="btn ghost" style="margin-top:14px" onclick="T={};go('home')">홈으로</button></div>`;
+  return `<div class="prog"><i style="width:100%"></i></div>
+  <div class="card f">
+    <h3><span class="ic">✎</span>교육 이수 정보 입력</h3>
+    <p style="margin:0;font-size:13.5px;color:var(--mute)">${D.slides.length}장을 모두 확인하셨습니다. 아래 정보를 입력하면 이수 처리되고 확인 메일이 발송됩니다.</p>
+    <label>이름 *</label><input id="fName" autocomplete="name" placeholder="홍길동">
+    <label>업체명 *</label><input id="fComp" autocomplete="organization" placeholder="주식회사 이티에스 / 협력사명">
+    <label>연락처 *</label><input id="fPhone" type="tel" autocomplete="tel" placeholder="010-0000-0000">
+    <label>이메일 * <span style="font-weight:400">(만료 알림 수신)</span></label><input id="fMail" type="email" autocomplete="email" placeholder="name@example.com">
+    <label style="display:flex;gap:8px;align-items:flex-start;margin-top:14px;font-size:13.5px;color:var(--ink)"><input type="checkbox" id="fAgree" style="width:auto;margin-top:4px">위 교육 내용을 확인하였으며 LGES 사업장 안전수칙을 준수하겠습니다. 입력한 정보는 교육 이수 관리와 만료 알림에만 사용됩니다.</label>
+    <button class="btn" id="sendBtn" style="margin-top:16px" onclick="submitTrain()">완료 · 전송</button>
+  </div>`;
+}
+const QKEY='lges_pending';
+function getQueue(){ try{ return JSON.parse(localStorage.getItem(QKEY)||'[]'); }catch(e){ return []; } }
+function setQueue(q){ try{ localStorage.setItem(QKEY, JSON.stringify(q)); }catch(e){} }
+async function postRecord(rec){
+  const r=await fetch(GAS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(rec)});
+  const j=await r.json(); if(!j.ok) throw new Error(j.error||'서버 오류'); return j;
+}
+async function flushQueue(){
+  if(!hasGas()||!navigator.onLine) return; let q=getQueue(); if(!q.length) return;
+  const rest=[]; let ok=0;
+  for(const rec of q){ try{ await postRecord(rec); ok++; }catch(e){ rest.push(rec); } }
+  setQueue(rest); if(ok) toast(`대기 중이던 교육 기록 ${ok}건을 전송했습니다`);
+}
+window.addEventListener('online', flushQueue); setInterval(flushQueue, 60000);
+// 연락처 정리: +82 10 … / 821012345678 / 01012345678 → 010-1234-5678
+function normPhone(v){ let d=String(v||'').replace(/\D/g,''); if(d.startsWith('82')) d='0'+d.slice(2); if(!/^01[016789]\d{7,8}$/.test(d)) return ''; return d.length===11 ? d.replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3') : d.replace(/(\d{3})(\d{3})(\d{4})/,'$1-$2-$3'); }
+async function submitTrain(){
+  const name=$('#fName').value.trim(), company=$('#fComp').value.trim(), phone=normPhone($('#fPhone').value), email=$('#fMail').value.trim();
+  if(!name||!company||!$('#fPhone').value.trim()||!email) return toast('모든 항목을 입력해 주세요');
+  if(!phone){ toast('연락처를 확인해 주세요 (예: 010-1234-5678)'); $('#fPhone').focus(); return; }
+  if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return toast('이메일 형식을 확인해 주세요');
+  if(!$('#fAgree').checked) return toast('확인 체크가 필요합니다');
+  if(!hasGas()){ toast('서버 미연결(테스트 모드) — 기록되지 않았습니다'); T.sent={name,company,email,expire:'(배포 후 표시)'}; render(); return; }
+  const btn=$('#sendBtn'); btn.disabled=true; btn.textContent='전송 중…';
+  const rec={name,company,phone,email,note:'slides:'+D.slides.length+' at:'+new Date().toISOString().slice(0,16)};
+  let j=null, lastErr=null;
+  for(let a=0;a<2&&!j;a++){ try{ j=await postRecord(rec); }catch(e){ lastErr=e; await new Promise(r=>setTimeout(r,1500)); } }
+  if(j){ T.sent={name,company,email,expire:j.expire}; render(); window.scrollTo(0,0); return; }
+  // 전송 실패 → 폰에 저장 후 자동 재전송
+  const q=getQueue(); q.push(rec); setQueue(q);
+  const exp=new Date(); exp.setMonth(exp.getMonth()+Number(setting('유효기간_개월',6)));
+  T.sent={name,company,email,expire:exp.toISOString().slice(0,10),queued:true}; render(); window.scrollTo(0,0);
+}
+
+/* ===== 규정 원문 (OPS) ===== */
+function opsCard(o, full){
+  const kws=String(o['연관검색어']||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const items=String(o['내용']||'').split('|').map(x=>x.trim()).filter(Boolean);
+  const show=full?items:items.slice(0,3);
+  const li=show.map(x=>{ const m=x.match(/^\[(.+?)\]\s*(.*)$/); if(m&&!m[2]) return `<li class="h">${esc(m[1])}</li>`; const body=m?m[2]:x; const {head,subs}=splitNumbered(body); const hd=(m?`<b style="color:var(--g)">${esc(m[1])}</b> `:'')+(head?rich(head):''); return subs.length?`<li>${hd}<ul class="sub">${subs.map(z=>`<li>${rich(z)}</li>`).join('')}</ul></li>`:`<li>${hd||rich(body)}</li>`; }).join('');
+  const imgs=String(o['원문이미지']||'').split(',').map(x=>x.trim()).filter(Boolean);
+  const id='o'+String(o['코드']).replace(/[^\w]/g,'');
+  return `<div class="card" id="${id}"><div class="tag"><span class="pill">${esc(o['코드'])}</span><span class="pill gray">${esc(o['분류'])}</span>${o['재개정일']?`<span style="font-size:11px;color:var(--mute)">${esc(o['재개정일'])} ${esc(o['개정번호']||'')}</span>`:''}${isNew(o['적용시작일'])?'<span class="pill red">변경됨</span>':''}</div>
+  <h4 style="font-size:15.5px">${esc(o['제목'])}</h4>
+  ${kws.length?`<div class="kwc">${kws.slice(0,8).map(k=>`<span>${esc(k)}</span>`).join('')}</div>`:''}
+  <ul class="ob">${li}</ul>
+  ${!full&&items.length>3?`<button class="more" onclick="go('ops','${esc(o['코드'])}')">전체 ${items.length}개 항목 보기 →</button>`:''}
+  <div class="row" style="margin-top:10px">${imgs.length?`<button class="btn sm" onclick='openViewer(${JSON.stringify(imgs)},${JSON.stringify(String(o['코드'])+' '+String(o['제목']))})'>📄 LG 원문 보기 (${imgs.length}p)</button>`:''}</div>
+  <div class="src">${esc(o['출처'])}</div></div>`;
+}
+function opsView(){
+  const list=D.ops||[]; const focus=T.arg; T.arg=null;
+  if(focus){ const o=list.find(x=>String(x['코드'])===String(focus)); if(o) return `<div class="ops">${opsCard(o,true)}<button class="btn ghost" onclick="go('ops')">규정 목록으로</button></div>`; }
+  const groups={}; list.forEach(o=>{ const g=String(o['분류']||'').split('-')[0]||'기타'; (groups[g]=groups[g]||[]).push(o); });
+  const order=['작업종류','공사설비','PPE','고위험작업','안전작업허가서','작업허가서','작업시간','면허제도','작업중지','비상','기타'];
+  const keys=Object.keys(groups).sort((a,b)=>(order.indexOf(a)+99)%99-(order.indexOf(b)+99)%99);
+  return `<div class="alert" style="background:var(--g3);border-color:var(--g)"><b>LG에너지솔루션 공사안전 OPS·규정 원문</b> — 협의체 자료에 공유된 ${list.length}건. 제목을 누르면 전체 내용, "원문 보기"를 누르면 LG 자료 페이지를 확대해서 볼 수 있습니다.</div>
+  ${keys.map(k=>`<div class="sec">${esc(k)}</div><div class="card" style="padding:4px 14px">${groups[k].map(o=>`<div style="display:flex;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer" onclick="go('ops','${esc(o['코드'])}')"><span class="pill" style="flex:none">${esc(o['코드'])}</span><span style="flex:1;font-size:14px">${esc(o['제목'])}${isNew(o['적용시작일'])?' <span class="pill red">변경됨</span>':''}<div style="font-size:11.5px;color:var(--mute)">${esc(o['분류'])} · ${esc(o['재개정일']||'')}</div></span><span style="color:var(--mute)">›</span></div>`).join('')}</div>`).join('')}`;
+}
+function openViewer(imgs,title){
+  const v=document.createElement('div'); v.className='viewer'; v.id='viewer';
+  v.innerHTML=`<div class="vh"><b>${esc(title)}</b><button onclick="closeViewer()">닫기 ✕</button></div><div class="vb">${imgs.map(i=>`<img src="${IMG}ops/${esc(i)}" alt="">`).join('')}<div class="tip">두 손가락으로 확대해서 보세요 · 출처: LG에너지솔루션 공사업체 안전보건 협의회 자료</div></div>`;
+  document.body.appendChild(v); document.body.style.overflow='hidden'; history.pushState({v:1},'');
+}
+function closeViewer(){ const v=$('#viewer'); if(v){ v.remove(); document.body.style.overflow=''; } }
+window.addEventListener('popstate',()=>closeViewer());
+
+/* ===== 벌점표 ===== */
+function penaltyView(){
+  const cats=[...new Set(D.penalty.map(p=>p['대분류']))]; if(!T.pcat) T.pcat=cats[0];
+  const rows=D.penalty.filter(p=>p['대분류']===T.pcat);
+  const lv=D.onestrike.filter(o=>/^작업중지 Level|^누적/.test(o['구분']));
+  return `<div class="alert"><b>26년 7월 1일 감점기준 전면 개정</b> — 위험성평가 미실시·추락방지·LOTO·인터락 해제·밀폐 환기 등 주요 항목이 <b>20점 + 작업중지</b>로 상향됐습니다. 누적 20점부터 사후조치, 70점 이상 입찰제한~거래중지.</div>
+  <div class="chips">${cats.map(c=>`<button class="${T.pcat===c?'on':''}" onclick="T.pcat='${esc(c)}';render()">${esc(c)}</button>`).join('')}</div>
+  <div class="card" style="padding:6px 10px"><table><thead><tr><th style="width:52px">코드</th><th>세부항목</th><th class="n">감점</th></tr></thead><tbody>
+  ${rows.map(p=>`<tr><td style="color:var(--mute);font-size:12px">${esc(p['코드'])}</td><td>${esc(p['세부항목'])}${p['작업중지']?' <span class="pill red" style="font-size:10px">중지</span>':''}${(p['변경']==='상향')?` <span class="pill amber" style="font-size:10px">${esc(p['구감점_25년9월'])}→</span>`:''}</td><td class="n${String(p['감점']).includes('/')?' multi':''}" style="color:${Number(String(p['감점']).split('/')[0])>=10?'var(--red)':'var(--ink)'}">${esc(String(p['감점']).replace(/\//g,'/\u200b'))}</td></tr>`).join('')}
+  </tbody></table><div class="src">${esc(rows[0]?.['출처']||'')}</div></div>
+  <div class="sec">작업중지 Level · 누적 점수 사후조치</div>
+  ${lv.map(o=>`<div class="card" style="padding:12px 14px"><div class="tag"><span class="pill ${/Level 3|70점|50점/.test(o['구분'])?'red':/Level 2|30점/.test(o['구분'])?'amber':''}">${esc(o['구분'])}</span></div><h4 style="margin:4px 0">${esc(o['위반내역'])}</h4><p class="sub">${esc(o['협력사페널티'])}</p>${o['비고']?`<p class="sub">${esc(o['비고'])}</p>`:''}</div>`).join('')}
+  <p class="foot">우수사례는 건별 가산점 3점 · 반기 적격수급업체 평가에 반영</p>`;
+}
+
+
+showSplash(); loadData();
+</script>
+</body>
+</html>
