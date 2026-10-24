@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>현장 안전 길잡이 — LG에너지솔루션 협력사</title>
+<title>협력사 현장 안전 길잡이 — LG에너지솔루션</title>
 <meta name="theme-color" content="#FFFFFF">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -266,20 +266,22 @@ ul.sub li:before{content:none}
 .top .t{color:#1a1f1c}.top .t small{color:#6b7570;opacity:1}
 .top .back,.top .home{background:#F1F4F3!important;color:#3d4642!important}
 meta{}
-@media(max-width:380px){.logo img.lges{height:16px}.top .t{font-size:14.5px}}
+.top .t{font-size:16px}
+@media(max-width:430px){.top{gap:10px;padding-left:12px;padding-right:12px}.logo img.lges{height:16px}.top .t{font-size:14.5px}.top .t small{font-size:11px}}
+@media(max-width:340px){.logo img.lges{height:13px}.top .t{font-size:13.5px}}
 </style>
 </head>
 <body>
 <div class="splash hid" id="splash" onclick="endSplash(true)">
   <div class="glow"></div>
   <div class="logos"><img class="lgo lglogo" src="../img/lges_logo.png" alt="LG Energy Solution" style="height:40px;max-width:72vw"></div>
-  <div class="tag"><b>함께 만드는 안전한 현장</b><small>고객사 현장 안전 길잡이 · 주식회사 이티에스</small></div>
+  <div class="tag"><b>함께 만드는 안전한 현장</b><small>협력사 현장 안전 길잡이 · LG에너지솔루션 오창</small></div>
   <div class="skip"><span id="spVer"></span><br>화면을 누르면 건너뜁니다</div>
 </div>
 <div class="app">
   <header class="top">
     <div class="logo"><img src="../img/lges_logo.png?v=3" alt="LG Energy Solution" class="lges"></div>
-    <div class="t">현장 안전 길잡이<small>작업수칙 검색 · 오창</small></div>
+    <div class="t">협력사 현장 안전 길잡이<small>작업수칙 검색 · 오창</small></div>
     <div class="hbtns"><button class="back hid" id="backBtn" onclick="goBack()">‹ <span class="bt">뒤로</span></button></div>
   </header>
   <main id="main"></main>
@@ -572,7 +574,7 @@ function doneView(){
       <div class="ok">✓</div><h2 style="margin:0 0 6px">교육 이수 완료</h2>
       <p style="margin:0;color:var(--mute);font-size:14px"><b style="color:var(--ink)">${esc(T.sent.name)}</b>님 (${esc(T.sent.company)})</p>
       <div class="kv" style="justify-content:center;margin:14px auto 0;max-width:260px;text-align:left"><b>이수일</b><span>${fmt(new Date().toISOString())}</span><b>유효기간</b><span><b>${esc(T.sent.expire)}</b>까지</span></div>
-      ${T.sent.queued?`<div class="alert" style="text-align:left;margin-top:14px"><b>통신 상태가 좋지 않아 기록을 폰에 저장했습니다.</b><br>통신이 되는 곳에서 이 앱을 다시 열면 자동으로 전송됩니다 (앱을 닫아도 기록은 폰에 남습니다). 전송되면 확인 메일이 갑니다.</div>`:`<p style="font-size:13px;color:var(--mute);margin:14px 0 0">이수 확인 메일을 ${esc(T.sent.email)}로 보냈습니다. 생산관리 확인 후 고객사 현장에 출입할 수 있습니다.</p>`}
+      ${T.sent.queued?`<div class="alert" style="text-align:left;margin-top:14px"><b>통신 상태가 좋지 않아 기록을 폰에 저장했습니다.</b><br>통신이 되는 곳에서 이 앱을 다시 열면 자동으로 전송됩니다 (앱을 닫아도 기록은 폰에 남습니다). 전송되면 확인 메일이 갑니다.</div>`:`<p style="font-size:13px;color:var(--mute);margin:14px 0 0">이수 확인 메일을 ${esc(T.sent.email)}로 보냈습니다. 확인 후 현장에 출입할 수 있습니다.</p>`}
       <button class="btn ghost" style="margin-top:14px" onclick="T={};go('home')">홈으로</button></div>`;
   return `<div class="prog"><i style="width:100%"></i></div>
   <div class="card f">
