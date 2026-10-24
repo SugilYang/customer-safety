@@ -269,9 +269,10 @@ meta{}
 .top .t{font-size:16px}
 @media(max-width:430px){.top{gap:10px;padding-left:12px;padding-right:12px}.logo img.lges{height:16px}.top .t{font-size:14.5px}.top .t small{font-size:11px}}
 @media(max-width:340px){.logo img.lges{height:13px}.top .t{font-size:13.5px}}
-.foot .mk{display:inline-block;margin-top:8px;padding:6px 12px;border-radius:999px;background:var(--g3);color:var(--g);font-size:11.5px}
-.foot .mk b{font-weight:800}
-.splash .spmk{display:inline-block;margin-bottom:6px;font-size:12px;font-weight:700;color:#3d4642}
+.foot .mk{display:block;margin:12px auto 0;padding-top:10px;border-top:1px solid var(--line);max-width:260px;color:var(--mute);font-size:11px}
+.foot .mk b{font-weight:700;color:var(--ink)}
+.foot .mk{line-height:1.7}.foot .mk a{color:var(--mute);text-decoration:underline;text-underline-offset:2px;white-space:nowrap}
+.splash .spmk{display:inline-block;margin-bottom:6px;font-size:11.5px;color:#5f6b65}
 </style>
 </head>
 <body>
@@ -305,7 +306,7 @@ const IMG = '../img/';
 let D = null, view = 'home', T = {};
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function verLine(dev){ const v=D.version||{}; return `LG에너지솔루션 오창 협력사 안전 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}<br><span class="mk">기획·개발 <b>㈜이티에스 환경안전팀 양수길 책임</b></span>`; }
+function verLine(dev){ const v=D.version||{}; return `LG에너지솔루션 오창 협력사 안전 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}<br><span class="mk">기획·개발 ㈜이티에스 환경안전팀 <b>양수길 책임</b><br>앱 관련 의견 <a href="mailto:sgyang@ets1.co.kr">sgyang@ets1.co.kr</a></span>`; }
 function prereport(small){ const r=(D.version||{}).prereport||{}; if(!r.EP1) return ''; return `<div class="prer${small?' sm':''}"><div class="ph">📲 7대 고위험 사전신고방 <small>공사 전일 14~15시 · 참여코드 <b>${esc(r.code)}</b></small></div><div class="pb"><a href="${r.EP1}" target="_blank" rel="noopener">EP1 신고방 열기</a><a href="${r.EP2}" target="_blank" rel="noopener">EP2 신고방 열기</a></div></div>`; }
 function dash(t){ const a=esc(t).split(' — '); return a.length>1 ? a.map(x=>`<span style="white-space:nowrap">${x}</span>`).join(' — ') : esc(t); }
 // **굵게** 와 |칩| 표기 → HTML
