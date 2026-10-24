@@ -306,7 +306,7 @@ const IMG = '../img/';
 let D = null, view = 'home', T = {};
 const $ = s => document.querySelector(s);
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function verLine(dev){ const v=D.version||{}; return `LG에너지솔루션 오창 협력사 안전 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}<br><span class="mk">기획·개발 ㈜이티에스 환경안전팀 <b>양수길 책임</b><br>앱 관련 의견 <a href="mailto:sgyang@ets1.co.kr">sgyang@ets1.co.kr</a></span>`; }
+function verLine(dev){ const v=D.version||{}; return `LG에너지솔루션 오창 협력사 안전 · ${esc(v['버전']||'')}<br>최초 개발 ${esc((v['최초개발']||'').replace(/-/g,'.'))} · 최근 업데이트 ${esc((v['배포일']||'').replace(/-/g,'.'))}<br>${esc(v['자료기준']||'')}<br>최근 반영 ${esc(v['최근반영']||'')}<br><span class="mk">기획·개발 ㈜이티에스 환경안전팀 <b>양수길 책임</b><br><a href="tel:01034692346">☎ 010-3469-2346</a> · <a href="mailto:sgyang@ets1.co.kr">sgyang@ets1.co.kr</a></span>`; }
 function prereport(small){ const r=(D.version||{}).prereport||{}; if(!r.EP1) return ''; return `<div class="prer${small?' sm':''}"><div class="ph">📲 7대 고위험 사전신고방 <small>공사 전일 14~15시 · 참여코드 <b>${esc(r.code)}</b></small></div><div class="pb"><a href="${r.EP1}" target="_blank" rel="noopener">EP1 신고방 열기</a><a href="${r.EP2}" target="_blank" rel="noopener">EP2 신고방 열기</a></div></div>`; }
 function dash(t){ const a=esc(t).split(' — '); return a.length>1 ? a.map(x=>`<span style="white-space:nowrap">${x}</span>`).join(' — ') : esc(t); }
 // **굵게** 와 |칩| 표기 → HTML
