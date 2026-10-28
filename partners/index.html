@@ -297,7 +297,7 @@ meta{}
   </div></nav>
 </div>
 <div class="toast" id="toast"></div>
-<script src="../data.js?v=1.4.20261010"></script>
+<script src="../data.js?v=1.5.20261028"></script>
 <script>
 /* ===== 설정 ===== */
 const GAS_URL = ''; // GAS 웹앱 URL (교육이수 기록·설정값 전용)
@@ -560,6 +560,7 @@ function fallbackArt(i){
   if(/허가서/.test(t)) return `<div class="art"><div class="flow"><span>허가서<br>수령</span><i>→</i><span>내용<br>확인</span><i>→</i><span>교육</span><i>→</i><span>서명</span><i>→</i><span>현장<br>비치</span></div>
     <div class="stop"><b>즉시 작업중지</b><div>❌ 카페·편의점·흡연실·사무실에서 허가서 작성</div><div>❌ 현장에 맞지 않는 체크리스트에 "V" 표시</div></div><div class="cap">26년 3월 Safety Police — 안전작업허가서 실태</div></div>`;
   if(/규칙/.test(t)) return `<div class="art"><div class="g4"><div><span class="e">🕘</span><b>09:00</b><small>작업 시작<br>연장 17~22시</small></div><div><span class="e">🚗</span><b>20km/h</b><small>횡단보도 일시정지<br>운전 중 휴대폰 ✕</small></div><div><span class="e">🚭</span><b>지정장소</b><small>실내·전자담배<br>전부 금지</small></div><div><span class="e">🍺</span><b>0.03↑</b><small>음주·마약<br>영구퇴출</small></div></div></div>`;
+  if(/밀폐/.test(t)) return `<div class="art"><div class="g4"><div><span class="e">👥</span><b>2인 1조</b><small>50분 작업<br>10분 이상 휴식</small></div><div><span class="e">📟</span><b>가스 측정</b><small>산소 18~23.5%<br>CO 30ppm 미만</small></div><div><span class="e">📻</span><b>무전기</b><small>30분 간격 연락<br>감시인 상주</small></div><div><span class="e">🏃</span><b>즉시 대피</b><small>측정기 경보<br>이상 증상 시</small></div></div><div class="cap">26년 10월 협의체 — 밀폐작업 OPS</div></div>`;
   return `<div class="noimg"><div class="big">🦺</div></div>`;
 }
 function startTrain(){ T={started:true,i:0,finished:false,log:[]}; render(); }
